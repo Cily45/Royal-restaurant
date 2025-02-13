@@ -1,4 +1,4 @@
-package royaleRestaurant;
+package model;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
