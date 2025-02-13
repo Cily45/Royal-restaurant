@@ -3,6 +3,8 @@ package model;
 import java.io.*;
 import java.util.ArrayList;
 
+import static services.FileManager.createDir;
+
 public class Restaurant {
     private static int currentId = 0;
     private static ArrayList<Restaurant> restaurants = new ArrayList<>();
@@ -20,7 +22,6 @@ public class Restaurant {
         this.employees = new ArrayList<>();
         this.id = currentId++;
         restaurants.add(this);
-        createDir();
     }
 
     public static ArrayList<Restaurant> getRestaurants() {
@@ -108,27 +109,6 @@ public class Restaurant {
                 '}';
     }
 
-    private void createDir(){
-        File path = new File("royaleRestaurant");
-        File file = new File(path.getAbsoluteFile() + "/data/" + this.name);
-        file.mkdir();
-        createFile(file);
-    }
 
-    private void createFile(File file){
-        try {
-            File txt = new File(file.getAbsoluteFile() + "/infos.txt");
-            FileWriter fileWriter = new FileWriter(txt);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write("Id: " + this.id + "\n");
-            bufferedWriter.write("Name: " + this.name + "\n");
-            bufferedWriter.write("Address: " + this.address + "\n");
-            bufferedWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
 
 }
