@@ -9,6 +9,12 @@ import static utils.ConsoleUtils.*;
 public class MenuRestaurant {
     public static void addRestaurant() {
         String name = askString("Entrez le nom de votre restaurant:");
+
+        if(Restaurant.isRestaurantExist(name)){
+            System.out.println("Ce restaurant existe déjà, veuillez en choisir un autre nom ou compléter le");
+            addRestaurant();
+        }
+
         String address = askString("Entrez l'adresse de votre restaurant:");
 
         Restaurant restaurant = new Restaurant(name, address);

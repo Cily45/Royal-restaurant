@@ -2,10 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+
 public class Order {
     private int id;
     private ArrayList<Dish> dishes;
-    private int cost;
+    private int cost = 0;
 
     public Order(Restaurant restaurant) {
         this.id = nextId(restaurant);
@@ -13,6 +14,7 @@ public class Order {
 
     public void addDish(Dish dish) {
         dishes.add(dish);
+        cost = sumDishes();
     }
 
     public int sumDishes() {
@@ -28,6 +30,17 @@ public class Order {
             System.out.println(dish.toString());
         }
         System.out.println(sumDishes());
+    }
+
+    public String toStringForText(){
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("id: %d\ncost: %d", id, cost));
+
+        for (int i = 0; i < dishes.size(); i++) {
+            result.append(String.format("dish %d: %s\n", i, dishes.get(i).toStringForText()));
+        }
+
+        return result.toString();
     }
 
     @Override

@@ -69,14 +69,21 @@ public class Employee {
         this.salary = salary;
     }
 
-    public int nextId(Restaurant restaurant){
+    public int nextId(Restaurant restaurant) {
         int maxId = 0;
-        for(Employee employee : restaurant.getEmployees()){
-            if(employee.id > maxId){
+        for (Employee employee : restaurant.getEmployees()) {
+            if (employee.id > maxId) {
                 maxId = employee.id;
             }
         }
         return maxId + 1;
+    }
+
+    public String toStringForText() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("id: %d\nfirstName: %s\nlastName: %s\nrole: %s\nsalary: %f\nhirringDate: %s\n",
+                id, firstName, lastName, role, salary, hirringDate));
+        return result.toString();
     }
 
     @Override

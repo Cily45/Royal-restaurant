@@ -6,7 +6,7 @@ import java.util.Calendar;
 public class Menu {
     private int id;
     private String name;
-    private Calendar date;
+    private Calendar createDate;
     private String menuType;
     private ArrayList<Dish> dishes;
 
@@ -14,6 +14,7 @@ public class Menu {
         this.name = name;
         this.menuType = menuType;
         this.id = nextId(restaurant);
+        this.createDate = Calendar.getInstance();
     }
 
     public int nextId(Restaurant restaurant) {
@@ -51,11 +52,11 @@ public class Menu {
     }
 
     public Calendar getDate() {
-        return date;
+        return createDate;
     }
 
     public void setDate(Calendar date) {
-        this.date = date;
+        this.createDate = date;
     }
 
     public ArrayList<Dish> getDish() {
@@ -86,12 +87,23 @@ public class Menu {
                 .ifPresent(dish -> System.out.println(dish.toString()));
     }
 
+    public String toStringForText() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("id: %d\nname: %s\nmenuType: %s\n createDate: %s\n", id, name, menuType, createDate.toString()));
+
+        for (int i = 0; i < dishes.size(); i++) {
+            result.append(String.format("dish %d: %s\n", i, dishes.get(i).toStringForText()));
+        }
+
+        return result.toString();
+    }
+
     @Override
     public String toString() {
         return "Menu{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", date=" + date +
+                ", nom='" + name + '\'' +
+                ", create date=" + createDate +
                 ", menuType='" + menuType + '\'' +
                 ", dishes=" + dishes +
                 '}';

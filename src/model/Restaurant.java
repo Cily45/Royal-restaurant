@@ -3,7 +3,8 @@ package model;
 import java.io.*;
 import java.util.ArrayList;
 
-import static services.FileManager.createDir;
+import static services.FileManager.createRestaurant;
+
 
 public class Restaurant {
     private static ArrayList<Restaurant> restaurants = new ArrayList<>();
@@ -22,11 +23,26 @@ public class Restaurant {
         this.menus = new ArrayList<>();
         this.id = nextId();
         restaurants.add(this);
+        createRestaurant(this);
+    }
+
+    public Restaurant(int id, String name, String address) {
+        this.name = name;
+        this.address = address;
+        this.orders = new ArrayList<>();
+        this.employees = new ArrayList<>();
+        this.menus = new ArrayList<>();
+        this.id =id;
+        restaurants.add(this);
+        createRestaurant(this);
     }
 
     public static ArrayList<Restaurant> getRestaurants() {
-
         return restaurants;
+    }
+
+    public static boolean isRestaurantExist(String name){
+        return restaurants.stream().anyMatch(r -> r.name.equals(name));
     }
 
     public static void displayRestaurants() {
@@ -175,11 +191,16 @@ public class Restaurant {
     }
 
     public void removeMenu(int menu) {
+
         menus.remove(menu);
+    }
+
+    public String toStringForText(){
+        return String.format("id: %d\nname: %s\naddress: %s\n", id, name, address);
     }
 
     @Override
     public String toString() {
-        return String.format("Restaurant: %s, %s", name, address);
+        return String.format("Restaurant: %s, adresse: %s", name, address);
     }
 }

@@ -139,6 +139,18 @@ public class Dish {
         this.specialPrice = specialPrice;
     }
 
+    public String toStringForText() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("id: %d\nname: %s\ndescription: %s\nprice: %d\ncalorie: %d\ncategory: %s\nsize: %s\naddDate: %s\navailable: %b\ndishType: %s\ntimeToPrepare: %d\nspecialPrice: %d\n",
+                id, name, description, price, calorie, category, size, addDate, available, dishType, timeToPrepare, specialPrice));
+
+        for (int i = 0; i < ingredients.size(); i++) {
+            result.append(String.format("ingredient %d: %s\n", i, ingredients.get(i)));
+        }
+
+        return result.toString();
+    }
+
     @Override
     public String toString() {
         return "Dish{" +
@@ -158,10 +170,10 @@ public class Dish {
                 '}';
     }
 
-    public int nextId(Menu menu){
+    public int nextId(Menu menu) {
         int maxId = 0;
-        for(Dish dish : menu.getDish()){
-            if(dish.id > maxId){
+        for (Dish dish : menu.getDish()) {
+            if (dish.id > maxId) {
                 maxId = dish.id;
             }
         }
