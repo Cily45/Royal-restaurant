@@ -1,8 +1,6 @@
 package menus;
 
-import java.util.Scanner;
-
-import static menus.RestaurantMenu.*;
+import static menus.MenuRestaurant.*;
 import static utils.ConsoleUtils.askInt;
 
 public class MainMenu {

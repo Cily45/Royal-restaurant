@@ -5,28 +5,28 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Employee {
-    private static int id = 0;
-    private int idEmployee;
+    private int id;
     private String firstName, lastName;
     private String role;
     private Calendar hirringDate;
     private double salary;
 
-    public Employee(String firstName, String lastName, String role, double salary, Calendar hirringDate) {
+    public Employee(String firstName, String lastName, String role, double salary, Calendar hirringDate, Restaurant restaurant) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.salary = salary;
         this.hirringDate = hirringDate;
-        this.idEmployee = id++;
+        this.id = nextId(restaurant);
+        restaurant.addEmployee(this);
     }
 
-    public int getIdEmployee() {
-        return idEmployee;
+    public int getId() {
+        return id;
     }
 
-    public void setIdEmployee(int idEmployee) {
-        this.idEmployee = idEmployee;
+    public void setId(int idEmployee) {
+        this.id = idEmployee;
     }
 
     public String getFirstName() {
@@ -69,12 +69,22 @@ public class Employee {
         this.salary = salary;
     }
 
+    public int nextId(Restaurant restaurant){
+        int maxId = 0;
+        for(Employee employee : restaurant.getEmployees()){
+            if(employee.id > maxId){
+                maxId = employee.id;
+            }
+        }
+        return maxId + 1;
+    }
+
     @Override
     public String toString() {
         Format f = new SimpleDateFormat("dd/MM/yyyy");
 
         return "royaleRestaurant.Dish.Employee{" +
-                "idEmployee=" + idEmployee +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", role='" + role + '\'' +

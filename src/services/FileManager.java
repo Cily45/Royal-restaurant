@@ -19,7 +19,6 @@ public class FileManager {
             FileWriter fileWriter = new FileWriter(txt);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(data + "\n");
-
             bufferedWriter.close();
         } catch (Exception e) {
             System.out.println("Erreur lors de la création du fichier "+ e.toString());;

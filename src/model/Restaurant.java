@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import static services.FileManager.createDir;
 
 public class Restaurant {
-    private static int currentId = 0;
     private static ArrayList<Restaurant> restaurants = new ArrayList<>();
     private int id;
     private String name;
     private String address;
-    private Menu menu;
+    private ArrayList<Menu> menus;
     private ArrayList<Order> orders;
     private ArrayList<Employee> employees;
 
@@ -20,11 +19,13 @@ public class Restaurant {
         this.address = address;
         this.orders = new ArrayList<>();
         this.employees = new ArrayList<>();
-        this.id = currentId++;
+        this.menus = new ArrayList<>();
+        this.id = nextId();
         restaurants.add(this);
     }
 
     public static ArrayList<Restaurant> getRestaurants() {
+
         return restaurants;
     }
 
@@ -78,6 +79,10 @@ public class Restaurant {
         }
     }
 
+    public ArrayList<Menu> getMenus() {
+        return menus;
+    }
+
     public void sumSalaryEmployees() {
         long count = 0L;
         for (Employee employee : employees) {
@@ -101,14 +106,80 @@ public class Restaurant {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+    public static void setRestaurants(ArrayList<Restaurant> restaurants) {
+        Restaurant.restaurants = restaurants;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public ArrayList<Menu> getMenu() {
+        return menus;
+    }
+
+    public void addMenu(Menu menu) {
+        this.menus.add(menu);
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
+
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(ArrayList<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public int nextId() {
+        int maxId = 0;
+        for (Restaurant restaurant : restaurants) {
+            if (restaurant.id > maxId) {
+                maxId = restaurant.id;
+            }
+        }
+        return maxId + 1;
+    }
+
+    public void displayMenus() {
+        for (Menu menu : menus) {
+            System.out.println(menu.toString());
+        }
+    }
+
+    public void removeMenu(int menu) {
+        menus.remove(menu);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Restaurant: %s, %s", name, address);
+    }
 }
