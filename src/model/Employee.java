@@ -4,12 +4,16 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static services.CreateNewObject.createEmploye;
+import static utils.ConsoleUtils.dateToString;
+
 public class Employee {
     private int id;
     private String firstName, lastName;
     private String role;
     private Calendar hirringDate;
     private double salary;
+    private String restaurantFile;
 
     public Employee(String firstName, String lastName, String role, double salary, Calendar hirringDate, Restaurant restaurant) {
         this.firstName = firstName;
@@ -18,7 +22,18 @@ public class Employee {
         this.salary = salary;
         this.hirringDate = hirringDate;
         this.id = nextId(restaurant);
+        this.restaurantFile = String.format("%s/data/%d-%s/employees",System.getProperty("user.dir"), restaurant.getId(), restaurant.getName());
         restaurant.addEmployee(this);
+        createEmploye(this, restaurant);
+    }
+    public Employee(int id,String firstName, String lastName, String role, double salary, Calendar hirringDate, String restaurantFile) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.salary = salary;
+        this.hirringDate = hirringDate;
+        this.id = id;
+        this.restaurantFile = restaurantFile;
     }
 
     public int getId() {
@@ -81,8 +96,8 @@ public class Employee {
 
     public String toStringForText() {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("id: %d\nfirstName: %s\nlastName: %s\nrole: %s\nsalary: %f\nhirringDate: %s\n",
-                id, firstName, lastName, role, salary, hirringDate));
+        result.append(String.format("id: %d\nfirstName: %s\nlastName: %s\nrole: %s\nsalary: %.2f\nhirringDate: %s\n",
+                id, firstName, lastName, role, salary, dateToString(hirringDate)));
         return result.toString();
     }
 
@@ -98,5 +113,13 @@ public class Employee {
                 ", hirringDate=" + f.format(hirringDate.getTime()) +
                 ", salary=" + salary +
                 '}';
+    }
+
+    public String getRestaurantFile() {
+        return restaurantFile;
+    }
+
+    public void setRestaurantFile(String restaurantFile) {
+        this.restaurantFile = restaurantFile;
     }
 }

@@ -1,25 +1,15 @@
 package services;
 
+import model.Employee;
 import model.Restaurant;
 
 import java.io.*;
 import java.util.*;
 
-public class FileManager {
-    public static void createRestaurant(Restaurant restaurant) {
-        File file = new File(System.getProperty("user.dir") + "/data/" + restaurant.getName());
-        file.mkdir();
-        File employeesFile = new File(file.getAbsolutePath() + "/employees");
-        employeesFile.mkdir();
-        File ordesrFile = new File(file.getAbsolutePath() + "/orders");
-        ordesrFile.mkdir();
-        File menusFile = new File(file.getAbsolutePath() + "/menus");
-        menusFile.mkdir();
-        File dishesFile = new File(menusFile.getAbsolutePath() + "/dishes");
-        dishesFile.mkdir();
+import static utils.ConsoleUtils.dateParse;
 
-        writeFile(file.getAbsolutePath()+"/info.txt",restaurant.toStringForText());
-    }
+public class FileManager {
+
 
     public static void writeFile(String filePath, String content) {
         try {
@@ -32,27 +22,48 @@ public class FileManager {
         }
     }
 
-    public static void test(){
+    public static void reloadFile(){
         File repertory = new File(System.getProperty("user.dir") + "/data");
-        String[] liste = repertory.list();
+        String[] list = repertory.list();
 
-        if (liste != null) {
-            for (int i = 0; i < liste.length; i++) {
-                File file = new File(System.getProperty("user.dir") + "/data/" + liste[i]);
+        if (list != null) {
+            for (int i = 0; i < list.length; i++) {
+                File file = new File(System.getProperty("user.dir") + "/data/" + list[i]);
                 String txt = readFile(file.getAbsolutePath()+"/info.txt");
-                List<String> lines = getInfos(txt);
+                Map<String, String> lines = getInfos(txt);
 
-                Restaurant restaurant = new Restaurant(Integer.parseInt(lines.get(0)), lines.get(1), lines.get(2));
+                Restaurant restaurant = new Restaurant(Integer.parseInt(lines.get("id")), lines.get("name"), lines.get("address"));
+
+                File repertoryEmployees = new File(file.getAbsolutePath()+ "/employees");
+                String[] listemployees = repertoryEmployees.list();
+
+                if (listemployees != null) {
+                    for (String listemployee : listemployees) {
+                        restaurant.addEmployee(reloadEmployee(file.getAbsolutePath(), listemployee));
+                    }
+                }
+
             }
         }
     }
 
-    public static List<String> getInfos(String text) {
-        List<String> infos = new ArrayList<>();
+    public static Employee reloadEmployee(String file, String employee) {
+        File fileEmployee = new File(file + "/employees/" + employee);
+        String txtEmployee = readFile(fileEmployee.getAbsolutePath());
+        Map<String, String> linesEmployee = getInfos(txtEmployee);
+
+        return new Employee(Integer.parseInt(linesEmployee.get("id")), linesEmployee.get("firstName"), linesEmployee.get("lastName"), linesEmployee.get("role"), Double.parseDouble(linesEmployee.get("salary").replace(',', '.')), dateParse(linesEmployee.get("hirringDate")), file);
+    }
+
+
+    public static Map<String, String> getInfos(String text) {
+        Map<String, String> infos = new HashMap<>();
+
         for (String line : text.split("\n")) {
             String[] infosLine = line.split(":");
-            infos.add(infosLine[1].trim());
+            infos.put(infosLine[0].trim(),infosLine[1].trim());
         }
+
         return infos;
     }
 
@@ -70,4 +81,5 @@ public class FileManager {
 
         return content.toString();
     }
+
 }

@@ -24,13 +24,12 @@ public class MenuRestaurant {
     }
 
     public static void addRestaurantMenu(Restaurant restaurant) {
-        String message = """
-                Que voulez-vous faire?
-                1. Créé un nouveau restaurant
-                2. Gérer le dernier restaurant créé
-                3. Menu principale
-                4. Quitter
-                """;
+        printHeader("Que voulez-vous faire?");
+        String[] message = {
+                "Créé un nouveau restaurant",
+                "Gérer le dernier restaurant créé",
+                "Menu principal",
+                "Quitter"};
 
         switch (askInt(message)) {
             case 1:
@@ -55,21 +54,19 @@ public class MenuRestaurant {
 
     public static void selectRestaurant() {
         Restaurant.displayRestaurants();
-        String message = "Choisissez un restaurant à gérer:";
+        String message = "Entrez l'id du restaurant que vous souhaitez gérer:";
         displayRestaurantMenu(Restaurant.getRestaurants().get(askInt(message)));
     }
 
     public static void displayRestaurantMenu(Restaurant restaurant) {
         System.out.println(restaurant.toString());
-
-        String message = """
-                Que voulez-vous faire?
-                1. Gestion des employés
-                2. Gestion du menu
-                3. Gestion des commandes
-                4. Menu principale
-                5. Quitter
-                """;
+        printHeader("Que voulez-vous faire?");
+        String[] message = {
+                "Gestion des employés",
+                "Gestion des menus",
+                "Gestion des commandes",
+                "Menu principale",
+                "Quitter"};
 
         switch (askInt(message)) {
             case 1:

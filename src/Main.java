@@ -1,12 +1,11 @@
 import menus.MainMenu;
 import model.Restaurant;
 
-import static services.FileManager.test;
+import static services.FileManager.reloadFile;
 
 public class Main {
     public static void main(String[] args) {
-        test();
-        System.out.println(Restaurant.getRestaurants());
+        reloadFile();
         MainMenu.displayMainMenu();
     }
 }

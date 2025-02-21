@@ -4,22 +4,19 @@ import model.Menu;
 import model.Restaurant;
 
 import static menus.MainMenu.displayMainMenu;
-import static utils.ConsoleUtils.askInt;
-import static utils.ConsoleUtils.askString;
+import static utils.ConsoleUtils.*;
 
 public class MenuMenu {
     public static void displayMenuMenus(Restaurant restaurant) {
         System.out.println(restaurant.toString());
-
-        String message = """
-                Que voulez-vous faire?
-                1. Afficher liste des menus
-                2. Ajouter un nouveau menu
-                3. Gérer un menu
-                4. Supprimer un menu
-                5. Menu principale
-                6. Quitter
-                """;
+        printHeader("GESTION DES MENUS");
+        String[] message = {
+                "Afficher liste des menus",
+                "Ajouter un nouveau menu",
+                "Gérer un menu",
+                "Supprimer un menu",
+                "Menu principale",
+                "Quitter"};
 
         switch (askInt(message)) {
             case 1:
@@ -63,13 +60,12 @@ public class MenuMenu {
     }
 
     public static void addMenuMenu(Menu menu) {
-        String message = """
-                Que voulez-vous faire?
-                1. Créé un nouveau menu
-                2. Gérer le dernier menu créé
-                3. Menu principale
-                4. Quitter
-                """;
+        printHeader("AJOUT DE MENU");
+        String[] message = {
+                "Créé un nouveau menu",
+                "Gérer le dernier menu créé",
+                "Menu principale",
+                "Quitter"};
 
         switch (askInt(message)) {
             case 1:
@@ -92,15 +88,13 @@ public class MenuMenu {
 
     public static void displayMenuMenu(Menu menu) {
         System.out.println(menu.getName());
-
-        String message = """
-                Que voulez-vous faire?
-                1. Ajouter un plat
-                2. Supprimer un plat
-                3. Modifier un plat
-                4. Menu principale
-                5. Quitter
-                """;
+        printHeader("MODIFICATION DU MENU");
+        String[] message = {
+                "Ajouter un plat",
+                "Supprimer un plat",
+                "Modifier un plat",
+                "Menu principale",
+                "Quitter"};
     }
 
     public static void selectMenu(Restaurant restaurant) {

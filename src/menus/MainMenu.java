@@ -2,15 +2,14 @@ package menus;
 
 import static menus.MenuRestaurant.*;
 import static utils.ConsoleUtils.askInt;
+import static utils.ConsoleUtils.printHeader;
 
 public class MainMenu {
     public static void displayMainMenu() {
-        String message = """
-                Que voulez-vous faire?
-                1. Ajouter un restaurant
-                2. Gérer un restaurant
-                3. Quitter
-                """;
+    printHeader("MENU PRINCIPAL");
+        String[] message = {"Ajouter un restaurant",
+                            "Gérer un restaurant",
+                            "Quitter"};
 
         switch (askInt(message)) {
             case 1:

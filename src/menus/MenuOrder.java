@@ -4,19 +4,18 @@ import model.Restaurant;
 
 import static menus.MainMenu.displayMainMenu;
 import static utils.ConsoleUtils.askInt;
+import static utils.ConsoleUtils.printHeader;
 
 public class MenuOrder {
     public static void displayOrderMenu(Restaurant restaurant) {
         System.out.println(restaurant.toString());
-
-        String message = """
-                Que voulez-vous faire?
-                1. Afficher liste des commandes
-                2. Ajouter un nouvelle commande
-                3. Supprimer une commande
-                4. Menu principale
-                5. Quitter
-                """;
+        printHeader("Que voulez-vous faire?");
+        String[] message = {
+                "Afficher liste des commandes",
+                "Ajouter un nouvelle commande",
+                "Supprimer une commande",
+                "Menu principale",
+                "Quitter"};
 
         switch (askInt(message)) {
             case 1:

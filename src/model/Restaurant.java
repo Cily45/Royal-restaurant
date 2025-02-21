@@ -3,7 +3,9 @@ package model;
 import java.io.*;
 import java.util.ArrayList;
 
-import static services.FileManager.createRestaurant;
+import static services.CreateNewObject.createRestaurant;
+import static utils.ConsoleUtils.dateToString;
+import static utils.ConsoleUtils.printHeader;
 
 
 public class Restaurant {
@@ -34,7 +36,6 @@ public class Restaurant {
         this.menus = new ArrayList<>();
         this.id =id;
         restaurants.add(this);
-        createRestaurant(this);
     }
 
     public static ArrayList<Restaurant> getRestaurants() {
@@ -46,9 +47,16 @@ public class Restaurant {
     }
 
     public static void displayRestaurants() {
+        String line =       "+------+-------------+---------------------+---------+------+----------+";
+        printHeader("Liste des restaurants");
+        System.out.println(line);
+        System.out.println( "|  Id  |    Nom      |      Adresse        | Employe | Menu | Commande |" );
+        System.out.println(line);
         for (int i = 0; i < restaurants.size(); i++) {
-            System.out.printf("%d. %s\n", i, restaurants.get(i).name);
+            System.out.printf("| %4d | %11s | %19s | %7d | %4d | %8d |\n", restaurants.get(i).id, restaurants.get(i).name, restaurants.get(i).address, restaurants.get(i).employees.size(), restaurants.get(i).menus.size(), restaurants.get(i).orders.size());
         }
+        System.out.println(line);
+
     }
 
     public void addOrder(Order order) {
@@ -76,9 +84,15 @@ public class Restaurant {
     }
 
     public void displayEmployees() {
-        for (Employee employee : employees) {
-            System.out.println(employee.toString());
+        String line =       "+------+-------------+---------------------+---------+------+----------+";
+        printHeader("Liste des employés");
+        System.out.println(line);
+        System.out.println( "|  Id  |    Nom    |    Prénom    |    Role    |    Début    | Salaire |" );
+        System.out.println(line);
+        for (int i = 0; i < employees.size(); i++) {
+            System.out.printf("| %4d | %9s | %10s | %10s |  %s | %s |\n", employees.get(i).getId(), employees.get(i).getFirstName(), employees.get(i).getLastName(), employees.get(i).getRole(), dateToString(employees.get(i).getHirringDate()), employees.get(i).getSalary());
         }
+        System.out.println(line);
     }
 
     public void saveOrders(String filename) {

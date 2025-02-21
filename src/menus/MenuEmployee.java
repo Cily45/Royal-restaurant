@@ -12,16 +12,13 @@ import static utils.ConsoleUtils.*;
 public class MenuEmployee {
     public static void displayEmployeeMenu(Restaurant restaurant) {
         System.out.println(restaurant.toString());
-
-        String message = """
-                Que voulez-vous faire?
-                1. Afficher liste des employés
-                2. Ajouter un employé
-                3. Modifier un employé
-                4. Supprimer un employé
-                5. Menu principale
-                6. Quitter
-                """;
+printHeader("GESTION DES EMPLOYES");
+        String[] message = {"Afficher liste des employés",
+                            "Ajouter un employé",
+                            "Modifier un employé",
+                            "Supprimer un employé",
+                            "Menu principale",
+                            "Quitter"};
 
         switch (askInt(message)) {
             case 1:
@@ -38,6 +35,8 @@ public class MenuEmployee {
                 break;
             case 5:
                 System.exit(0);
+            case 6:
+                displayMainMenu();
             default:
                 System.out.println("Veuillez entrer un nombre entier valide!");
                 displayMainMenu();
@@ -59,14 +58,13 @@ public class MenuEmployee {
     }
 
     public static void addEmployeeMenu(Restaurant restaurant, Employee employee) {
-        String message = """
-                Que voulez-vous faire?
-                1. Créé un nouvel employé
-                2. Gérer le dernier employé créé
-                3. Retour au menu gestion des employés
-                4. Menu principale
-                5. Quitter
-                """;
+        printHeader("AJOUT EMPLOYE");
+        String[] message = {
+                "Créé un nouvel employé",
+                "Gérer le dernier employé créé",
+                "Retour au menu gestion des employés",
+                "Menu principale",
+                "Quitter"};
 
         switch (askInt(message)) {
             case 1:
@@ -93,14 +91,13 @@ public class MenuEmployee {
 
     public static void editEmployeeMenu(Restaurant restaurant, Employee employee) {
         System.out.println(employee.toString());
-        String message = """
-                Que voulez-vous faire?
-                1. Modifier 
-                2. Gérer le dernier employé créé
-                3. Retour au menu gestion des employés
-                4. Menu principale
-                5. Quitter
-                """;
+        printHeader(String.format("MODIFICATION DE L'EMPLOYE %s %s", employee.getLastName(), employee.getFirstName()) );
+        String[] message = {
+                "Modifier",
+                "Gérer le dernier employé créé",
+                "Retour au menu gestion des employés",
+                "Menu principale",
+                "Quitter}"};
 
         switch (askInt(message)) {
             case 1:
