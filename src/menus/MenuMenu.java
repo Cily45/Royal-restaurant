@@ -15,7 +15,7 @@ public class MenuMenu {
                 "Ajouter un nouveau menu",
                 "Gérer un menu",
                 "Supprimer un menu",
-                "Menu principale",
+                "Menu principal",
                 "Quitter"};
 
         switch (askInt(message)) {

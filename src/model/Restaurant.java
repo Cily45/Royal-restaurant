@@ -50,10 +50,10 @@ public class Restaurant {
         String line =       "+------+-------------+---------------------+---------+------+----------+";
         printHeader("Liste des restaurants");
         System.out.println(line);
-        System.out.println( "|  Id  |    Nom      |      Adresse        | Employe | Menu | Commande |" );
+        System.out.println( "|  Id  |    Nom      |    Adresse     |  Employe |   Menu   | Commande |" );
         System.out.println(line);
         for (int i = 0; i < restaurants.size(); i++) {
-            System.out.printf("| %4d | %11s | %19s | %7d | %4d | %8d |\n", restaurants.get(i).id, restaurants.get(i).name, restaurants.get(i).address, restaurants.get(i).employees.size(), restaurants.get(i).menus.size(), restaurants.get(i).orders.size());
+            System.out.printf("| %4d | %11s | %14s | %8d | %8d | %8d |\n", restaurants.get(i).id, restaurants.get(i).name.substring(0,Math.min(11, restaurants.get(i).name.length())), restaurants.get(i).address.substring(0,Math.min(14, restaurants.get(i).address.length())), restaurants.get(i).employees.size(), restaurants.get(i).menus.size(), restaurants.get(i).orders.size());
         }
         System.out.println(line);
 
@@ -90,7 +90,7 @@ public class Restaurant {
         System.out.println( "|  Id  |    Nom    |    Prénom    |    Role    |    Début    | Salaire |" );
         System.out.println(line);
         for (int i = 0; i < employees.size(); i++) {
-            System.out.printf("| %4d | %9s | %10s | %10s |  %s | %s |\n", employees.get(i).getId(), employees.get(i).getFirstName(), employees.get(i).getLastName(), employees.get(i).getRole(), dateToString(employees.get(i).getHirringDate()), employees.get(i).getSalary());
+            System.out.printf("| %4d | %9s | %10s | %10s |  %s | %s |\n", employees.get(i).getId(), employees.get(i).getFirstName().substring(0,8), employees.get(i).getLastName().substring(0,9), employees.get(i).getRole().substring(0,9), dateToString(employees.get(i).getHirringDate()), employees.get(i).getSalary());
         }
         System.out.println(line);
     }

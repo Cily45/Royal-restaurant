@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static services.CreateNewObject.createMenu;
+
 public class Menu {
     private int id;
     private String name;
@@ -15,6 +17,16 @@ public class Menu {
         this.menuType = menuType;
         this.id = nextId(restaurant);
         this.createDate = Calendar.getInstance();
+        createMenu( this, restaurant);
+        restaurant.addMenu(this);
+    }
+
+    public Menu(int id, String name, String menuType, Restaurant restaurant) {
+        this.name = name;
+        this.menuType = menuType;
+        this.id = id;
+        this.createDate = Calendar.getInstance();
+        restaurant.addMenu(this);
     }
 
     public int nextId(Restaurant restaurant) {
@@ -89,7 +101,7 @@ public class Menu {
 
     public String toStringForText() {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("id: %d\nname: %s\nmenuType: %s\n createDate: %s\n", id, name, menuType, createDate.toString()));
+        result.append(String.format("id: %d\nname: %s\nmenuType: %s\ncreateDate: %s\n", id, name, menuType, createDate.toString()));
 
         for (int i = 0; i < dishes.size(); i++) {
             result.append(String.format("dish %d: %s\n", i, dishes.get(i).toStringForText()));

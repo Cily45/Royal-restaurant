@@ -95,7 +95,7 @@ public class ConsoleUtils {
 
     public static void printHeader(String mesage){
         System.out.println("\n"+ "=".repeat(72));
-        System.out.println("|"+" ".repeat((70 - mesage.length())/2) + mesage + " ".repeat((70 - mesage.length())/2) + "|");
+        System.out.println("|"+" ".repeat((70 - mesage.length())/2) + mesage + " ".repeat((int) Math.ceil( (double) (70 - mesage.length()) /2)) + "|");
         System.out.println("=".repeat(72));
     }
 }

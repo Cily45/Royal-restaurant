@@ -1,6 +1,7 @@
 package services;
 
 import model.Employee;
+import model.Menu;
 import model.Restaurant;
 
 
@@ -27,5 +28,12 @@ public class CreateNewObject {
     public static void createEmploye(Employee employee, Restaurant restaurant) {
         String path = String.format("%s/data/%d/employees/%d", System.getProperty("user.dir"),restaurant.getId(), employee.getId());
         writeFile(path,employee.toStringForText());
+    }
+
+    public static void createMenu(Menu menu, Restaurant restaurant) {
+        String path = String.format("%s/data/%d/menus/%d.txt", System.getProperty("user.dir"),restaurant.getId(), menu.getId());
+        File file = new File(path);
+        file.mkdir();
+        writeFile(file.getAbsolutePath()+"/info.txt",menu.toStringForText());
     }
 }
