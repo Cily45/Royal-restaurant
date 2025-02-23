@@ -4,6 +4,7 @@ import model.Employee;
 import model.Restaurant;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static menus.MainMenu.displayMainMenu;
@@ -49,7 +50,7 @@ printHeader("GESTION DES EMPLOYES");
         String firstName = askString("Entrez le prénom de l'employé:");
         String role = askString("Entrez le role de l'employe:");
         double salary = askDouble("Entrez le salaire de l'employe:");
-        Calendar hirringDate = askDate("Entrez le date de l'embauche(dd/MM/yyyy):");
+        Date hirringDate = askDate("Entrez le date de l'embauche(dd/MM/yyyy):");
 
         Employee employee = new Employee(lastName, firstName, role, salary, hirringDate, restaurant);
 

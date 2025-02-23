@@ -90,7 +90,13 @@ public class Restaurant {
         System.out.println( "|  Id  |    Nom    |    Prénom    |    Role    |    Début    | Salaire |" );
         System.out.println(line);
         for (int i = 0; i < employees.size(); i++) {
-            System.out.printf("| %4d | %9s | %10s | %10s |  %s | %s |\n", employees.get(i).getId(), employees.get(i).getFirstName().substring(0,8), employees.get(i).getLastName().substring(0,9), employees.get(i).getRole().substring(0,9), dateToString(employees.get(i).getHirringDate()), employees.get(i).getSalary());
+            System.out.printf("| %4d | %9s | %10s | %10s |  %s | %s |\n",
+                    employees.get(i).getId(),
+                    employees.get(i).getFirstName().substring(0,Math.min(employees.get(i).getFirstName().length(), 8)),
+                    employees.get(i).getLastName().substring(0,Math.min(employees.get(i).getLastName().length(), 9)),
+                    employees.get(i).getRole().substring(0,Math.min(employees.get(i).getRole().length(), 9)),
+                    dateToString(employees.get(i).getHirringDate()),
+                    employees.get(i).getSalary());
         }
         System.out.println(line);
     }

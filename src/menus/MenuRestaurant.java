@@ -55,7 +55,7 @@ public class MenuRestaurant {
     public static void selectRestaurant() {
         Restaurant.displayRestaurants();
         String message = "Entrez l'id du restaurant que vous souhaitez gérer:";
-        displayRestaurantMenu(Restaurant.getRestaurants().get(askInt(message)));
+        displayRestaurantMenu(Restaurant.getRestaurants().get(askInt(message)-1));
     }
 
     public static void displayRestaurantMenu(Restaurant restaurant) {

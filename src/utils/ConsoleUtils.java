@@ -57,38 +57,32 @@ public class ConsoleUtils {
         return result;
     }
 
-    public static Calendar askDate(String message) {
+    public static Date askDate(String message) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(message);
         String date = scanner.nextLine();
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            Date date1 = dateFormat.parse(date);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date1);
-            return calendar;
+            return dateFormat.parse(date);
         } catch (Exception e) {
             System.out.println("Veuillez entrer une date au format valide!");
             return askDate(message);
         }
     }
 
-    public static Calendar dateParse(String date){
+    public static Date dateParse(String date){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-        Calendar calendar = Calendar.getInstance();
         try {
-            Date date1 = dateFormat.parse(date);
-            calendar.setTime(date1);
-
+            return dateFormat.parse(date);
         } catch (Exception e) {
             System.out.println("Veuillez entrer une date au format valide!");
         }
-        return calendar;
+        return null;
     }
 
-    public static String dateToString(Calendar date){
+    public static String dateToString(Date date){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date.getTime());
     }

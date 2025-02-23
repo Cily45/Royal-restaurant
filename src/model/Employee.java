@@ -3,6 +3,7 @@ package model;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static services.CreateNewObject.createEmploye;
 import static utils.ConsoleUtils.dateToString;
@@ -11,11 +12,11 @@ public class Employee {
     private int id;
     private String firstName, lastName;
     private String role;
-    private Calendar hirringDate;
+    private Date hirringDate;
     private double salary;
     private String restaurantFile;
 
-    public Employee(String firstName, String lastName, String role, double salary, Calendar hirringDate, Restaurant restaurant) {
+    public Employee(String firstName, String lastName, String role, double salary, Date hirringDate, Restaurant restaurant) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -26,7 +27,7 @@ public class Employee {
         restaurant.addEmployee(this);
         createEmploye(this, restaurant);
     }
-    public Employee(int id,String firstName, String lastName, String role, double salary, Calendar hirringDate, String restaurantFile) {
+    public Employee(int id,String firstName, String lastName, String role, double salary, Date hirringDate, String restaurantFile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -68,11 +69,11 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public Calendar getHirringDate() {
+    public Date getHirringDate() {
         return hirringDate;
     }
 
-    public void setHirringDate(Calendar hirringDate) {
+    public void setHirringDate(Date hirringDate) {
         this.hirringDate = hirringDate;
     }
 

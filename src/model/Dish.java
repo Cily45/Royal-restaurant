@@ -2,30 +2,32 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Dish {
     private int id;
     private String name;
     private String description;
-    private int price;
+    private double price;
     private int calorie;
     private String category;
-    private String size; //nombre de pers.
-    private Calendar addDate;
+    private int size; //nombre de pers.
+    private Date createDate;
     private boolean available;
     private ArrayList<String> ingredients;
     private String dishType;
     private int timeToPrepare;
-    private int specialPrice;
+    private double specialPrice;
+    private String menuFile;
 
-    public Dish(String name, String description, int price, int calorie, String category, String size, Calendar addDate, boolean available, ArrayList<String> ingredients, String dishType, int timeToPrepare, int specialPrice, Menu menu) {
+    public Dish(String name, String description, double price, int calorie, String category, int size, Date createDate, boolean available, ArrayList<String> ingredients, String dishType, int timeToPrepare, double specialPrice, Menu menu) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.calorie = calorie;
         this.category = category;
         this.size = size;
-        this.addDate = addDate;
+        this.createDate = createDate;
         this.available = available;
         this.ingredients = ingredients;
         this.dishType = dishType;
@@ -33,6 +35,23 @@ public class Dish {
         this.specialPrice = specialPrice;
         this.id = nextId(menu);
         menu.addDish(this);
+    }
+
+    public Dish(int id, String name, String description, double price, int calorie, String category, int size, Date createDate, boolean available, ArrayList<String> ingredients, String dishType, int timeToPrepare, double specialPrice, String menuFile) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.calorie = calorie;
+        this.category = category;
+        this.size = size;
+        this.createDate = createDate;
+        this.available = available;
+        this.ingredients = ingredients;
+        this.dishType = dishType;
+        this.timeToPrepare = timeToPrepare;
+        this.specialPrice = specialPrice;
+        this.id = id;
+        this.menuFile = menuFile;
     }
 
     public String getName() {
@@ -43,11 +62,11 @@ public class Dish {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -83,20 +102,20 @@ public class Dish {
         this.category = category;
     }
 
-    public String getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(int size) {
         this.size = size;
     }
 
-    public Calendar getAddDate() {
-        return addDate;
+    public Date getcreateDate() {
+        return createDate;
     }
 
-    public void setAddDate(Calendar addDate) {
-        this.addDate = addDate;
+    public void setcreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public boolean isAvailable() {
@@ -131,7 +150,7 @@ public class Dish {
         this.timeToPrepare = timeToPrepare;
     }
 
-    public int getSpecialPrice() {
+    public double getSpecialPrice() {
         return specialPrice;
     }
 
@@ -141,8 +160,8 @@ public class Dish {
 
     public String toStringForText() {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("id: %d\nname: %s\ndescription: %s\nprice: %d\ncalorie: %d\ncategory: %s\nsize: %s\naddDate: %s\navailable: %b\ndishType: %s\ntimeToPrepare: %d\nspecialPrice: %d\n",
-                id, name, description, price, calorie, category, size, addDate, available, dishType, timeToPrepare, specialPrice));
+        result.append(String.format("id: %d\nname: %s\ndescription: %s\nprice: %d\ncalorie: %d\ncategory: %s\nsize: %s\ncreateDate: %s\navailable: %b\ndishType: %s\ntimeToPrepare: %d\nspecialPrice: %d\n",
+                id, name, description, price, calorie, category, size, createDate, available, dishType, timeToPrepare, specialPrice));
 
         for (int i = 0; i < ingredients.size(); i++) {
             result.append(String.format("ingredient %d: %s\n", i, ingredients.get(i)));
@@ -161,7 +180,7 @@ public class Dish {
                 ", calorie=" + calorie +
                 ", category='" + category + '\'' +
                 ", size='" + size + '\'' +
-                ", addDate=" + addDate +
+                ", createDate=" + createDate +
                 ", available=" + available +
                 ", ingredients=" + ingredients +
                 ", dishType='" + dishType + '\'' +

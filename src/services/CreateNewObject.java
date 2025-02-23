@@ -31,7 +31,7 @@ public class CreateNewObject {
     }
 
     public static void createMenu(Menu menu, Restaurant restaurant) {
-        String path = String.format("%s/data/%d/menus/%d.txt", System.getProperty("user.dir"),restaurant.getId(), menu.getId());
+        String path = String.format("%s/data/%d/menus/%d", System.getProperty("user.dir"),restaurant.getId(), menu.getId());
         File file = new File(path);
         file.mkdir();
         writeFile(file.getAbsolutePath()+"/info.txt",menu.toStringForText());

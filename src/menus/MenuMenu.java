@@ -3,6 +3,8 @@ package menus;
 import model.Menu;
 import model.Restaurant;
 
+import java.util.Date;
+
 import static menus.MainMenu.displayMainMenu;
 import static utils.ConsoleUtils.*;
 
@@ -52,8 +54,9 @@ public class MenuMenu {
     public static void addMenu(Restaurant restaurant) {
         String name = askString("Entrez le nom de votre menu:");
         String address = askString("Entrez le type de menu:");
+        Date dateCreate = askDate("Entrez la date de la créatio du menu(dd/MM/yyyy):");
 
-        Menu menu = new Menu(name, address, restaurant);
+        Menu menu = new Menu(name, address, restaurant, dateCreate);
 
         System.out.printf("Le menu: %s à bien été crée\n", name);
         addMenuMenu(menu);

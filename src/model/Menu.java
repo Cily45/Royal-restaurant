@@ -2,31 +2,36 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import static services.CreateNewObject.createMenu;
+import static utils.ConsoleUtils.dateToString;
 
 public class Menu {
     private int id;
     private String name;
-    private Calendar createDate;
+    private Date createDate;
     private String menuType;
     private ArrayList<Dish> dishes;
+    private String restaurantFile;
 
-    public Menu(String name, String menuType, Restaurant restaurant) {
+
+    public Menu(String name, String menuType, Restaurant restaurant, Date createDate) {
         this.name = name;
         this.menuType = menuType;
         this.id = nextId(restaurant);
-        this.createDate = Calendar.getInstance();
+        this.createDate = createDate;
+        this.dishes = new ArrayList<>();
         createMenu( this, restaurant);
         restaurant.addMenu(this);
     }
 
-    public Menu(int id, String name, String menuType, Restaurant restaurant) {
+    public Menu(int id, String name, String menuType, Date createDate, String restaurantFile) {
         this.name = name;
         this.menuType = menuType;
         this.id = id;
-        this.createDate = Calendar.getInstance();
-        restaurant.addMenu(this);
+        this.createDate = createDate;
+        this.restaurantFile = restaurantFile;
     }
 
     public int nextId(Restaurant restaurant) {
@@ -63,11 +68,11 @@ public class Menu {
         this.name = name;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return createDate;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.createDate = date;
     }
 
@@ -101,7 +106,7 @@ public class Menu {
 
     public String toStringForText() {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("id: %d\nname: %s\nmenuType: %s\ncreateDate: %s\n", id, name, menuType, createDate.toString()));
+        result.append(String.format("id: %d\nname: %s\nmenuType: %s\ncreateDate: %s\n", id, name, menuType, dateToString(createDate)));
 
         for (int i = 0; i < dishes.size(); i++) {
             result.append(String.format("dish %d: %s\n", i, dishes.get(i).toStringForText()));
