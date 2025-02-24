@@ -14,26 +14,26 @@ public class Employee {
     private int id;
     private String firstName, lastName;
     private String role;
-    private Date hirringDate;
+    private Date hireDate;
     private double salary;
     private File employeFile;
 
-    public Employee(String firstName, String lastName, String role, double salary, Date hirringDate, Restaurant restaurant) {
+    public Employee(String firstName, String lastName, String role, double salary, Date hireDate, Restaurant restaurant) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.salary = salary;
-        this.hirringDate = hirringDate;
+        this.hireDate = hireDate;
         this.id = nextId(restaurant);
         restaurant.addEmployee(this);
         this.employeFile = createEmployee(this, restaurant);
     }
-    public Employee(int id,String firstName, String lastName, String role, double salary, Date hirringDate, File restaurantFile) {
+    public Employee(int id,String firstName, String lastName, String role, double salary, Date hireDate, File restaurantFile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.salary = salary;
-        this.hirringDate = hirringDate;
+        this.hireDate = hireDate;
         this.id = id;
         this.employeFile = restaurantFile;
     }
@@ -74,12 +74,12 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public Date getHirringDate() {
-        return hirringDate;
+    public Date gethireDate() {
+        return hireDate;
     }
 
-    public void setHirringDate(Date hirringDate) {
-        this.hirringDate = hirringDate;
+    public void sethireDate(Date hireDate) {
+        this.hireDate = hireDate;
     }
 
     public double getSalary() {
@@ -102,8 +102,8 @@ public class Employee {
 
     public String toStringForText() {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("id: %d\nfirstName: %s\nlastName: %s\nrole: %s\nsalary: %.2f\nhirringDate: %s\n",
-                id, firstName, lastName, role, salary, dateToString(hirringDate)));
+        result.append(String.format("id: %d\nfirstName: %s\nlastName: %s\nrole: %s\nsalary: %.2f\nhireDate: %s\n",
+                id, firstName, lastName, role, salary, dateToString(hireDate)));
         return result.toString();
     }
 
@@ -116,7 +116,7 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", role='" + role + '\'' +
-                ", hirringDate=" + f.format(hirringDate.getTime()) +
+                ", hireDate=" + f.format(hireDate.getTime()) +
                 ", salary=" + salary +
                 '}';
     }

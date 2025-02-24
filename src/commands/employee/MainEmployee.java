@@ -24,7 +24,7 @@ public class MainEmployee implements Command {
     public void execute() {
         printHeader(this.message());
 
-        Command[] commands = {new DisplayEmployee(this.restaurant), new AddEmployee(this.restaurant), new RemoveEmployee(this.restaurant), new MainRestaurant(), new Exit()};
+        Command[] commands = {new DisplayEmployee(this.restaurant), new AddEmployee(this.restaurant), new ModifyEmployee(this.restaurant), new RemoveEmployee(this.restaurant), new MainRestaurant(), new Exit()};
 
         int choice = askInt(commands, message());
         if (choice < commands.length && choice >= 0) {

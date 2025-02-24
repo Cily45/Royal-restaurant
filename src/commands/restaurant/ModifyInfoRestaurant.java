@@ -24,8 +24,9 @@ public class ModifyInfoRestaurant implements Command {
     public void execute() {
         String[] itemsDisplay = {"Nom", "Adresse"};
         String[] itemsInfo = {"name", "address"};
+        String info = String.format("modification du restaurant: %s", restaurant.getName());
 
-        int choice = askInt(itemsDisplay, this.message());
+        int choice = askInt(itemsDisplay, info);
 
         if (choice >= 0 && choice < itemsDisplay.length) {
             String entry = askString(String.format("Entrez la nouvelle valeur pour %s: ", itemsDisplay[choice]));

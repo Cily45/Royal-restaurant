@@ -102,7 +102,7 @@ public class Restaurant {
                     employees.get(i).getFirstName().substring(0,Math.min(employees.get(i).getFirstName().length(), 19)),
                     employees.get(i).getLastName().substring(0,Math.min(employees.get(i).getLastName().length(), 19)),
                     employees.get(i).getRole().substring(0,Math.min(employees.get(i).getRole().length(), 18)),
-                    dateToString(employees.get(i).getHirringDate()),
+                    dateToString(employees.get(i).gethireDate()),
                     employees.get(i).getSalary());
         }
         System.out.println(line);

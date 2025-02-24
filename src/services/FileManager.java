@@ -119,7 +119,7 @@ public class FileManager {
                 linesEmployee.get("lastName"),
                 linesEmployee.get("role"),
                 Double.parseDouble(linesEmployee.get("salary").replace(',', '.')),
-                dateParse(linesEmployee.get("hirringDate")),
+                dateParse(linesEmployee.get("hireDate")),
                 fileEmployee);
     }
     
