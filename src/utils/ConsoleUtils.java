@@ -1,5 +1,7 @@
 package utils;
 
+import commands.Command;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,25 +20,7 @@ public class ConsoleUtils {
         System.out.println(message);
         int result = 0;
         try {
-            result = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Veuillez entrer un nombre valide!");
-            return askInt(message);
-        }
-        return result;
-    }
-    public static int askInt(String[] message) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("|"+ " ".repeat(70) + "|");
-        for (int i = 0; i < message.length; i++) {
-            System.out.println(String.format("|%s[%d] %s%s|" ," ".repeat(10),i+1,message[i], " ".repeat((70 - message[i].length())-14)));
-        }
-        System.out.println("|"+ " ".repeat(70) + "|");
-        System.out.println("=".repeat(72));
-        System.out.print("Veuillez choisir une option: ");
-        int result = 0;
-        try {
-            result = Integer.parseInt(scanner.nextLine());
+            result = scanner.nextInt();
         } catch (NumberFormatException e) {
             System.out.println("Veuillez entrer un nombre valide!");
             return askInt(message);
@@ -44,12 +28,59 @@ public class ConsoleUtils {
         return result;
     }
 
+    public static int askInt(Command[] commands, String message) {
+        printHeader(message);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("|"+ " ".repeat(98) + "|");
+        for (int i = 0; i < commands.length; i++) {
+            System.out.println(String.format("|%s[%d] %s%s|" ," ".repeat(10),i+1 ,commands[i].message(), " ".repeat((98 - commands[i].message().length())-14)));
+        }
+        System.out.println("|"+ " ".repeat(98) + "|");
+        System.out.println("=".repeat(100));
+        System.out.print("Veuillez choisir une option: ");
+        int result = 0;
+        try {
+            result = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Veuillez entrer un nombre valide!");
+            return askInt(commands, message);
+        }
+        return result-1;
+    }
+
+    public static int askInt(String[]  items, String message) {
+        printHeader(message);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("|"+ " ".repeat(98) + "|");
+        for (int i = 0; i < items.length; i++) {
+            System.out.println(String.format("|%s[%d] %s%s|" ," ".repeat(10),i+1 ,items[i], " ".repeat((98 - items[i].length())-14)));
+        }
+        System.out.println("|"+ " ".repeat(98) + "|");
+        System.out.println("=".repeat(100));
+        System.out.print("Veuillez choisir une option: ");
+        int result = 0;
+        try {
+            result = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Veuillez entrer un nombre valide!");
+            return askInt(items, message);
+        }
+        return result-1;
+    }
+
+    public static boolean askBoolean(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        String result = scanner.nextLine();
+        return result.toLowerCase().equals("o");
+    }
+
     public static double askDouble(String message) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(message);
         double result = 0;
         try {
-            result = Double.parseDouble(scanner.nextLine());
+            result = scanner.nextDouble();
         } catch (NumberFormatException e) {
             System.out.println("Veuillez entrer un nombre valide!");
             return askInt(message);
@@ -88,8 +119,13 @@ public class ConsoleUtils {
     }
 
     public static void printHeader(String mesage){
-        System.out.println("\n"+ "=".repeat(72));
-        System.out.println("|"+" ".repeat((70 - mesage.length())/2) + mesage + " ".repeat((int) Math.ceil( (double) (70 - mesage.length()) /2)) + "|");
-        System.out.println("=".repeat(72));
+        System.out.println("\n"+ "=".repeat(100));
+        System.out.println("|"+" ".repeat((98 - mesage.length())/2) + mesage.toUpperCase() + " ".repeat((int) Math.ceil( (double) (98 - mesage.length()) /2)) + "|");
+        System.out.println("=".repeat(100));
+    }
+
+    private String formatString(String string){
+        return String.format("|%s%10s|", " ".repeat(10), string, " ".repeat(10));
+
     }
 }

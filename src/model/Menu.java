@@ -36,7 +36,7 @@ public class Menu {
 
     public int nextId(Restaurant restaurant) {
         int maxId = 0;
-        for (Menu menu : restaurant.getMenu()) {
+        for (Menu menu : restaurant.getMenus()) {
             if (menu.id > maxId) {
                 maxId = menu.id;
             }

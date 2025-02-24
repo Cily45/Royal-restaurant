@@ -1,4 +1,4 @@
-package menus;
+package menuDisplay;
 
 public class DishMenu {
 }

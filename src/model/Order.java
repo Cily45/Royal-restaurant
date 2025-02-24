@@ -7,9 +7,15 @@ public class Order {
     private int id;
     private ArrayList<Dish> dishes;
     private int cost = 0;
+    private String restaurantFile;
 
     public Order(Restaurant restaurant) {
         this.id = nextId(restaurant);
+    }
+
+    public Order(int id, String restaurantFile) {
+        this.id = id;
+        this.restaurantFile = restaurantFile;
     }
 
     public void addDish(Dish dish) {

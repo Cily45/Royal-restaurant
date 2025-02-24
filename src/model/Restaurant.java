@@ -16,6 +16,7 @@ public class Restaurant {
     private ArrayList<Menu> menus;
     private ArrayList<Order> orders;
     private ArrayList<Employee> employees;
+    private File restaurantFile;
 
     public Restaurant(String name, String address) {
         this.name = name;
@@ -25,16 +26,17 @@ public class Restaurant {
         this.menus = new ArrayList<>();
         this.id = nextId();
         restaurants.add(this);
-        createRestaurant(this);
+        this.restaurantFile = createRestaurant(this);
     }
 
-    public Restaurant(int id, String name, String address) {
+    public Restaurant(int id, String name, String address, File restaurantFile) {
         this.name = name;
         this.address = address;
         this.orders = new ArrayList<>();
         this.employees = new ArrayList<>();
         this.menus = new ArrayList<>();
         this.id =id;
+        this.restaurantFile = restaurantFile;
         restaurants.add(this);
     }
 
@@ -47,13 +49,18 @@ public class Restaurant {
     }
 
     public static void displayRestaurants() {
-        String line =       "+------+-------------+---------------------+---------+------+----------+";
-        printHeader("Liste des restaurants");
+        String line =       "+------+--------------------+-------------------------------------+----------+----------+----------+";
         System.out.println(line);
-        System.out.println( "|  Id  |    Nom      |    Adresse     |  Employe |   Menu   | Commande |" );
+        System.out.println( "|  Id  |        Nom         |               Adresse               |  Employe |   Menu   | Commande |" );
         System.out.println(line);
         for (int i = 0; i < restaurants.size(); i++) {
-            System.out.printf("| %4d | %11s | %14s | %8d | %8d | %8d |\n", restaurants.get(i).id, restaurants.get(i).name.substring(0,Math.min(11, restaurants.get(i).name.length())), restaurants.get(i).address.substring(0,Math.min(14, restaurants.get(i).address.length())), restaurants.get(i).employees.size(), restaurants.get(i).menus.size(), restaurants.get(i).orders.size());
+            System.out.printf("| %4d | %18s | %35s | %8d | %8d | %8d |\n",
+                    restaurants.get(i).id,
+                    restaurants.get(i).name.substring(0,Math.min(17, restaurants.get(i).name.length())),
+                    restaurants.get(i).address.substring(0,Math.min(34, restaurants.get(i).address.length())),
+                    restaurants.get(i).employees.size(),
+                    restaurants.get(i).menus.size(),
+                    restaurants.get(i).orders.size());
         }
         System.out.println(line);
 
@@ -84,17 +91,17 @@ public class Restaurant {
     }
 
     public void displayEmployees() {
-        String line =       "+------+-------------+---------------------+---------+------+----------+";
+        String line =       "+------+----------------------+----------------------+---------------------+------------+----------+";
         printHeader("Liste des employés");
         System.out.println(line);
-        System.out.println( "|  Id  |    Nom    |    Prénom    |    Role    |    Début    | Salaire |" );
+        System.out.println( "|  Id  |         Nom          |        Prénom        |         Role        |   Début    | Salaire  |" );
         System.out.println(line);
         for (int i = 0; i < employees.size(); i++) {
-            System.out.printf("| %4d | %9s | %10s | %10s |  %s | %s |\n",
+            System.out.printf("| %4d | %20s | %20s | %19s | %s |  %.2f |\n",
                     employees.get(i).getId(),
-                    employees.get(i).getFirstName().substring(0,Math.min(employees.get(i).getFirstName().length(), 8)),
-                    employees.get(i).getLastName().substring(0,Math.min(employees.get(i).getLastName().length(), 9)),
-                    employees.get(i).getRole().substring(0,Math.min(employees.get(i).getRole().length(), 9)),
+                    employees.get(i).getFirstName().substring(0,Math.min(employees.get(i).getFirstName().length(), 19)),
+                    employees.get(i).getLastName().substring(0,Math.min(employees.get(i).getLastName().length(), 19)),
+                    employees.get(i).getRole().substring(0,Math.min(employees.get(i).getRole().length(), 18)),
                     dateToString(employees.get(i).getHirringDate()),
                     employees.get(i).getSalary());
         }
@@ -116,6 +123,7 @@ public class Restaurant {
     }
 
     public ArrayList<Menu> getMenus() {
+
         return menus;
     }
 
@@ -146,6 +154,14 @@ public class Restaurant {
         Restaurant.restaurants = restaurants;
     }
 
+    public void addMenu(Menu menu) {
+        this.menus.add(menu);
+    }
+
+    public File getRestaurantFile() {
+        return restaurantFile;
+    }
+
     public int getId() {
         return id;
     }
@@ -168,14 +184,6 @@ public class Restaurant {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public ArrayList<Menu> getMenu() {
-        return menus;
-    }
-
-    public void addMenu(Menu menu) {
-        this.menus.add(menu);
     }
 
     public ArrayList<Order> getOrders() {

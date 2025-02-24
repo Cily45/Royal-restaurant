@@ -1,11 +1,13 @@
 package model;
 
+import java.io.File;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static services.CreateNewObject.createEmploye;
+
+import static services.CreateNewObject.createEmployee;
 import static utils.ConsoleUtils.dateToString;
 
 public class Employee {
@@ -14,7 +16,7 @@ public class Employee {
     private String role;
     private Date hirringDate;
     private double salary;
-    private String restaurantFile;
+    private File employeFile;
 
     public Employee(String firstName, String lastName, String role, double salary, Date hirringDate, Restaurant restaurant) {
         this.firstName = firstName;
@@ -23,18 +25,21 @@ public class Employee {
         this.salary = salary;
         this.hirringDate = hirringDate;
         this.id = nextId(restaurant);
-        this.restaurantFile = String.format("%s/data/%d-%s/employees",System.getProperty("user.dir"), restaurant.getId(), restaurant.getName());
         restaurant.addEmployee(this);
-        createEmploye(this, restaurant);
+        this.employeFile = createEmployee(this, restaurant);
     }
-    public Employee(int id,String firstName, String lastName, String role, double salary, Date hirringDate, String restaurantFile) {
+    public Employee(int id,String firstName, String lastName, String role, double salary, Date hirringDate, File restaurantFile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.salary = salary;
         this.hirringDate = hirringDate;
         this.id = id;
-        this.restaurantFile = restaurantFile;
+        this.employeFile = restaurantFile;
+    }
+
+    public File getEmployeFile() {
+        return employeFile;
     }
 
     public int getId() {
@@ -114,13 +119,5 @@ public class Employee {
                 ", hirringDate=" + f.format(hirringDate.getTime()) +
                 ", salary=" + salary +
                 '}';
-    }
-
-    public String getRestaurantFile() {
-        return restaurantFile;
-    }
-
-    public void setRestaurantFile(String restaurantFile) {
-        this.restaurantFile = restaurantFile;
     }
 }

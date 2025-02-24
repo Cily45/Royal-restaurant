@@ -10,7 +10,7 @@ import java.io.File;
 import static services.FileManager.writeFile;
 
 public class CreateNewObject {
-    public static void createRestaurant(Restaurant restaurant) {
+    public static File createRestaurant(Restaurant restaurant) {
         String path = String.format("%s/data/%d", System.getProperty("user.dir"),restaurant.getId());
         File file = new File(path);
         file.mkdir();
@@ -18,16 +18,20 @@ public class CreateNewObject {
         employeesFile.mkdir();
         File ordesrFile = new File(file.getAbsolutePath() + "/orders");
         ordesrFile.mkdir();
-        File menusFile = new File(file.getAbsolutePath() + "/menus");
+        File menusFile = new File(file.getAbsolutePath() + "/menuDisplay");
         menusFile.mkdir();
 
         writeFile(file.getAbsolutePath()+"/info.txt",restaurant.toStringForText());
 
+        return file;
+
     }
 
-    public static void createEmploye(Employee employee, Restaurant restaurant) {
+    public static File createEmployee(Employee employee, Restaurant restaurant) {
         String path = String.format("%s/data/%d/employees/%d", System.getProperty("user.dir"),restaurant.getId(), employee.getId());
         writeFile(path,employee.toStringForText());
+
+        return new File(path);
     }
 
     public static void createMenu(Menu menu, Restaurant restaurant) {
