@@ -1,7 +1,11 @@
 package commands.menu;
 
 import commands.Command;
+import commands.restaurant.MainRestaurant;
 import model.Restaurant;
+
+import static utils.ConsoleUtils.askInt;
+import static utils.ConsoleUtils.printHeader;
 
 public class DisplayMenu implements Command {
     private Restaurant restaurant;
@@ -17,6 +21,10 @@ public class DisplayMenu implements Command {
 
     @Override
     public void execute() {
+        printHeader(this.message());
         restaurant.displayMenus();
+        if(askInt("[0] pour retourner au menu ") == -1){
+            new MainRestaurant().execute();
+        }
     }
 }

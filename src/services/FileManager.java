@@ -44,7 +44,6 @@ public class FileManager {
 
                 File repertoryMenus = new File(file.getAbsolutePath() + "/menus");
                 String[] listMenus = repertoryMenus.list();
-                System.out.println(repertoryMenus.getAbsolutePath());
                 if (listMenus != null) {
                     for (String menu : listMenus) {
 

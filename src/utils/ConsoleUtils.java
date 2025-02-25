@@ -4,17 +4,18 @@ import commands.Command;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
+// 14h17 60%
+//14h47 48% 30min == 12% (1h => 24% 3h => 72%)
 public class ConsoleUtils {
     public static String askString(String message) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(message);
+        System.out.print(message);
         String result = scanner.nextLine();
 
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             return askString(message);
         }
 
@@ -23,7 +24,7 @@ public class ConsoleUtils {
 
     public static int askInt(String message) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(message);
+        System.out.print(message);
         int result = 0;
 
         try {
@@ -39,13 +40,13 @@ public class ConsoleUtils {
     public static int askInt(Command[] commands, String message) {
         printHeader(message);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("|"+ " ".repeat(98) + "|");
+        System.out.println("|" + " ".repeat(98) + "|");
 
         for (int i = 0; i < commands.length; i++) {
-            System.out.println(String.format("|%s[%d] %s%s|" ," ".repeat(10),i+1 ,commands[i].message(), " ".repeat((98 - commands[i].message().length())-14)));
+            System.out.println(String.format("|%s[%d] %s%s|", " ".repeat(10), i + 1, commands[i].message(), " ".repeat((98 - commands[i].message().length()) - 14)));
         }
 
-        System.out.println("|"+ " ".repeat(98) + "|");
+        System.out.println("|" + " ".repeat(98) + "|");
         System.out.println("=".repeat(100));
         System.out.print("Veuillez choisir une option: ");
         int result = 0;
@@ -57,19 +58,19 @@ public class ConsoleUtils {
             return askInt(commands, message);
         }
 
-        return result-1;
+        return result - 1;
     }
 
-    public static int askInt(String[]  items, String message) {
+    public static int askInt(String[] items, String message) {
         printHeader(message);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("|"+ " ".repeat(98) + "|");
+        System.out.println("|" + " ".repeat(98) + "|");
 
         for (int i = 0; i < items.length; i++) {
-            System.out.println(String.format("|%s[%d] %s%s|" ," ".repeat(10),i+1 ,items[i], " ".repeat((98 - items[i].length())-14)));
+            System.out.println(String.format("|%s[%d] %s%s|", " ".repeat(10), i + 1, items[i], " ".repeat((98 - items[i].length()) - 14)));
         }
 
-        System.out.println("|"+ " ".repeat(98) + "|");
+        System.out.println("|" + " ".repeat(98) + "|");
         System.out.println("=".repeat(100));
         System.out.print("Veuillez choisir une option ([0] pour retourner en arrière): ");
         int result = 0;
@@ -81,14 +82,14 @@ public class ConsoleUtils {
             return askInt(items, message);
         }
 
-        return result-1;
+        return result - 1;
     }
 
     public static boolean askBoolean(String message) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(message);
+        System.out.print(message);
         String result = scanner.nextLine();
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             return askBoolean(message);
         }
 
@@ -97,7 +98,7 @@ public class ConsoleUtils {
 
     public static double askDouble(String message) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(message);
+        System.out.print(message);
         String result = scanner.nextLine();
 
         try {
@@ -111,7 +112,7 @@ public class ConsoleUtils {
 
     public static Date askDate(String message) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(message);
+        System.out.print(message);
         String date = scanner.nextLine();
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -124,7 +125,7 @@ public class ConsoleUtils {
         }
     }
 
-    public static Date dateParse(String date){
+    public static Date dateParse(String date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
@@ -136,18 +137,18 @@ public class ConsoleUtils {
         return null;
     }
 
-    public static String dateToString(Date date){
+    public static String dateToString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date.getTime());
     }
 
-    public static void printHeader(String mesage){
-        System.out.println("\n"+ "=".repeat(100));
-        System.out.println("|"+" ".repeat((98 - mesage.length())/2) + mesage.toUpperCase() + " ".repeat((int) Math.ceil( (double) (98 - mesage.length()) /2)) + "|");
+    public static void printHeader(String mesage) {
+        System.out.println("\n" + "=".repeat(100));
+        System.out.println("|" + " ".repeat((98 - mesage.length()) / 2) + mesage.toUpperCase() + " ".repeat((int) Math.ceil((double) (98 - mesage.length()) / 2)) + "|");
         System.out.println("=".repeat(100));
     }
 
-    private String formatString(String string){
+    private String formatString(String string) {
         return String.format("|%s%10s|", " ".repeat(10), string, " ".repeat(10));
     }
 }

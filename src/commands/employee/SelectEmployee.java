@@ -37,7 +37,7 @@ public class SelectEmployee implements Command {
         } else if (id == 0) {
             new MainEmployee(restaurant).execute();
         } else {
-            System.out.println("Restaurant inexistant");
+            System.out.println("Employé inexistant");
             this.execute();
         }
     }

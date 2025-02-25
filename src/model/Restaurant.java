@@ -2,6 +2,7 @@ package model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import static services.CreateNewObject.createRestaurant;
 import static utils.ConsoleUtils.dateToString;
@@ -27,6 +28,7 @@ public class Restaurant {
         this.id = nextId();
         restaurants.add(this);
         this.restaurantFile = createRestaurant(this);
+        restaurants.sort(Comparator.comparing(Restaurant::getId));
     }
 
     public Restaurant(int id, String name, String address, File restaurantFile) {
@@ -38,6 +40,7 @@ public class Restaurant {
         this.id = id;
         this.restaurantFile = restaurantFile;
         restaurants.add(this);
+        restaurants.sort(Comparator.comparing(Restaurant::getId));
     }
 
     public static ArrayList<Restaurant> getRestaurants() {
@@ -68,6 +71,7 @@ public class Restaurant {
 
     public void addOrder(Order order) {
         orders.add(order);
+        orders.sort(Comparator.comparing(Order::getId));
     }
 
     public void displayOrders() {
@@ -78,6 +82,7 @@ public class Restaurant {
 
     public void addEmployee(Employee employee) {
         employees.add(employee);
+        employees.sort(Comparator.comparing(Employee::getId));
     }
 
     public void removeEmployee(Employee employee) {
@@ -115,7 +120,7 @@ public class Restaurant {
         System.out.println("|  Id  |               Nom                |              Type               |   Création   | Plats |");
         System.out.println(line);
         for (int i = 0; i < menus.size(); i++) {
-            System.out.printf("| %4d | %32s | %31s |  %12s |  %4d |\n",
+            System.out.printf("| %4d | %-32s | %-31s | %12s | %5d |\n",
                     menus.get(i).getId(),
                     menus.get(i).getName().substring(0, Math.min(menus.get(i).getName().length(), 32)),
                     menus.get(i).getMenuType().substring(0, Math.min(menus.get(i).getMenuType().length(), 31)),
@@ -173,6 +178,7 @@ public class Restaurant {
 
     public void addMenu(Menu menu) {
         this.menus.add(menu);
+        menus.sort(Comparator.comparing(Menu::getId));
     }
 
     public File getRestaurantFile() {

@@ -67,4 +67,36 @@ public class Order {
         }
         return maxId + 1;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(ArrayList<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public String getRestaurantFile() {
+        return restaurantFile;
+    }
+
+    public void setRestaurantFile(String restaurantFile) {
+        this.restaurantFile = restaurantFile;
+    }
 }

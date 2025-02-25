@@ -1,6 +1,8 @@
 package commands.menu;
 
 import commands.Command;
+import commands.general.Exit;
+import commands.restaurant.MainRestaurant;
 import model.Restaurant;
 
 import static utils.ConsoleUtils.askInt;
@@ -19,7 +21,11 @@ public class MainMenu implements Command {
 
     @Override
     public void execute() {
-        Command[] commands = {new DisplayMenu(restaurant), new AddMenu(restaurant)};
+        Command[] commands = {
+                new DisplayMenu(restaurant),
+                new AddMenu(restaurant),
+                new MainRestaurant(),
+                new Exit()};
 
         int choice = askInt(commands, this.message());
 
@@ -29,7 +35,5 @@ public class MainMenu implements Command {
             System.out.println("Veuillez entrer un nombre entier valide!");
             this.execute();
         }
-
-        this.execute();
     }
 }

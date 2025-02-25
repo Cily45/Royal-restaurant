@@ -13,7 +13,12 @@ public class MainRestaurant implements Command {
 
     @Override
     public void execute() {
-        Command[] commands = {new DisplayRestaurant(), new AddRestaurant(), new SelectRestaurant("modifier"), new SelectRestaurant("supprimer"), new Exit()};
+        Command[] commands = {
+                new DisplayRestaurant(),
+                new AddRestaurant(),
+                new SelectRestaurant("modifier"),
+                new SelectRestaurant("supprimer"),
+                new Exit()};
 
         int choice = askInt(commands, this.message());
 
@@ -22,11 +27,10 @@ public class MainRestaurant implements Command {
 
             if (command != null) {
                 command.execute();
-            }else{
+            } else {
                 System.out.println("Veuillez entrer un nombre entier valide!");
                 this.execute();
             }
         }
-        this.execute();
     }
 }
