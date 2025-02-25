@@ -71,7 +71,7 @@ public class ConsoleUtils {
 
         System.out.println("|"+ " ".repeat(98) + "|");
         System.out.println("=".repeat(100));
-        System.out.print("Veuillez choisir une option: ");
+        System.out.print("Veuillez choisir une option ([0] pour retourner en arrière): ");
         int result = 0;
 
         try {
@@ -98,16 +98,15 @@ public class ConsoleUtils {
     public static double askDouble(String message) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(message);
-        double result = 0;
+        String result = scanner.nextLine();
 
         try {
-            result = scanner.nextDouble();
-        } catch (NumberFormatException e) {
+            return Double.parseDouble(result);
+        } catch (Exception e) {
             System.out.println("Veuillez entrer un nombre valide!");
             return askInt(message);
         }
 
-        return result;
     }
 
     public static Date askDate(String message) {

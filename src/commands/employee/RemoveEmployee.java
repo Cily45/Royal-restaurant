@@ -11,9 +11,11 @@ import static utils.ConsoleUtils.askString;
 
 public class RemoveEmployee implements Command {
     private Restaurant restaurant;
+    private Employee employee;
 
-    public RemoveEmployee(Restaurant restaurant) {
+    public RemoveEmployee(Restaurant restaurant, Employee employee) {
         this.restaurant = restaurant;
+        this.employee = employee;
     }
 
     @Override
@@ -23,24 +25,15 @@ public class RemoveEmployee implements Command {
 
     @Override
     public void execute() {
-        restaurant.displayEmployees();
-        int id = askInt("Entrez l'id de l'employé que vous souhaitez supprimer");
+        String message = String.format("Etes vous sur de vouloir supprimer l'employé nommé %s %s O/N?", employee.getFirstName(), employee.getLastName());
+        String answer = askString(message).toLowerCase();
 
-        if(restaurant.getEmployees().stream().anyMatch(r -> r.getId() == id)){
-            Employee employee = restaurant.getEmployees().stream().filter(r -> r.getId() == id).findFirst().get();
-            String message = String.format("Etes vous sur de vouloir supprimer l'employé nommé %s %s O/N?", employee.getFirstName(), employee.getLastName());
-            String answer = askString(message).toLowerCase();
-
-            if(answer.equals("o")){
-                delete(employee.getEmployeFile());
-                restaurant.getEmployees().remove(employee);
-            }
-
-            new MainRestaurant().execute();
-
-        }else{
-            System.out.println("Restaurant inexistant");
-            this.execute();
+        if (answer.equals("o")) {
+            delete(employee.getEmployeFile());
+            restaurant.getEmployees().remove(employee);
+            System.out.println("L'employé a bien été supprimer");
         }
+
+        new MainEmployee(restaurant).execute();
     }
 }

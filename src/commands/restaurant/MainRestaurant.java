@@ -4,7 +4,6 @@ import commands.Command;
 import commands.general.Exit;
 
 import static utils.ConsoleUtils.askInt;
-import static utils.ConsoleUtils.printHeader;
 
 public class MainRestaurant implements Command {
     @Override
@@ -14,7 +13,7 @@ public class MainRestaurant implements Command {
 
     @Override
     public void execute() {
-        Command[] commands = {new DisplayRestaurant(), new AddRestaurant(), new ModifyRestaurant(), new RemoveRestaurant(), new Exit()};
+        Command[] commands = {new DisplayRestaurant(), new AddRestaurant(), new SelectRestaurant("modifier"), new SelectRestaurant("supprimer"), new Exit()};
 
         int choice = askInt(commands, this.message());
 

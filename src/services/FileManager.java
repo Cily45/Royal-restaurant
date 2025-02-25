@@ -59,6 +59,7 @@ public class FileManager {
                         }
                     }
                 }
+
                 File repertoryOrder = new File(file.getAbsolutePath()+ "/order");
                 String[] listOrder = repertoryOrder.list();
 
