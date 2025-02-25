@@ -42,20 +42,23 @@ public class FileManager {
                     }
                 }
 
-                File repertoryMenus = new File(file.getAbsolutePath() + "/menuDisplay");
+                File repertoryMenus = new File(file.getAbsolutePath() + "/menus");
                 String[] listMenus = repertoryMenus.list();
+                System.out.println(repertoryMenus.getAbsolutePath());
                 if (listMenus != null) {
                     for (String menu : listMenus) {
+
                         Menu menu1 = reloadMenu(file.getAbsolutePath(), menu);
                         restaurant.addMenu(menu1);
 
-                        File repertoryDish = new File(file.getAbsolutePath() + "/menuDisplay" + "/" + menu);
+                        File repertoryDish = new File(file.getAbsolutePath() + "/menus" + "/" + menu);
                         String[] listDish = repertoryDish.list();
-                        
+
                         if (listDish != null) {
                             for (String dish : listDish) {
+                                if(!dish.equals("info.txt")){
                                 Dish dish1 = reloadDish(repertoryDish.getAbsolutePath(), dish);
-                            }
+                            }}
                         }
                     }
                 }
@@ -101,7 +104,7 @@ public class FileManager {
     }
 
     public static Order reloadOrder(String file, String order) {
-        File fileOrder = new File(file + "/orderDisplay/" + order + "/info.txt");
+        File fileOrder = new File(file + "/order/" + order + "/info.txt");
         String txtOrder = readFile(fileOrder.getAbsolutePath());
         Map<String, String> linesOrder = getInfos(txtOrder);
 
@@ -125,7 +128,7 @@ public class FileManager {
     }
     
     public static Menu reloadMenu(String file, String menu) {
-        File fileMenu = new File(file + "/menuDisplay/" + menu + "/info.txt");
+        File fileMenu = new File(file + "/menus/" + menu + "/info.txt");
         String txtMenu = readFile(fileMenu.getAbsolutePath());
         Map<String, String> linesMenu = getInfos(txtMenu);
 

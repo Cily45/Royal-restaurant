@@ -29,6 +29,7 @@ public class MainMenu implements Command {
             System.out.println("Veuillez entrer un nombre entier valide!");
             this.execute();
         }
+
         this.execute();
     }
 }

@@ -35,7 +35,7 @@ public class Restaurant {
         this.orders = new ArrayList<>();
         this.employees = new ArrayList<>();
         this.menus = new ArrayList<>();
-        this.id =id;
+        this.id = id;
         this.restaurantFile = restaurantFile;
         restaurants.add(this);
     }
@@ -44,20 +44,20 @@ public class Restaurant {
         return restaurants;
     }
 
-    public static boolean isRestaurantExist(String name){
+    public static boolean isRestaurantExist(String name) {
         return restaurants.stream().anyMatch(r -> r.name.equals(name));
     }
 
     public static void displayRestaurants() {
-        String line =       "+------+--------------------+-------------------------------------+----------+----------+----------+";
+        String line = "+------+--------------------+-------------------------------------+----------+----------+----------+";
         System.out.println(line);
-        System.out.println( "|  Id  |        Nom         |               Adresse               |  Employe |   Menu   | Commande |" );
+        System.out.println("|  Id  |        Nom         |               Adresse               |  Employe |   Menu   | Commande |");
         System.out.println(line);
         for (int i = 0; i < restaurants.size(); i++) {
             System.out.printf("| %4d | %18s | %35s | %8d | %8d | %8d |\n",
                     restaurants.get(i).id,
-                    restaurants.get(i).name.substring(0,Math.min(17, restaurants.get(i).name.length())),
-                    restaurants.get(i).address.substring(0,Math.min(34, restaurants.get(i).address.length())),
+                    restaurants.get(i).name.substring(0, Math.min(17, restaurants.get(i).name.length())),
+                    restaurants.get(i).address.substring(0, Math.min(34, restaurants.get(i).address.length())),
                     restaurants.get(i).employees.size(),
                     restaurants.get(i).menus.size(),
                     restaurants.get(i).orders.size());
@@ -91,19 +91,36 @@ public class Restaurant {
     }
 
     public void displayEmployees() {
-        String line =       "+------+----------------------+----------------------+---------------------+------------+----------+";
+        String line = "+------+----------------------+----------------------+---------------------+------------+----------+";
         printHeader("Liste des employés");
         System.out.println(line);
-        System.out.println( "|  Id  |         Nom          |        Prénom        |         Role        |   Début    | Salaire  |" );
+        System.out.println("|  Id  |         Nom          |        Prénom        |         Role        |   Début    | Salaire  |");
         System.out.println(line);
         for (int i = 0; i < employees.size(); i++) {
             System.out.printf("| %4d | %20s | %20s | %19s | %s |  %.2f |\n",
                     employees.get(i).getId(),
-                    employees.get(i).getFirstName().substring(0,Math.min(employees.get(i).getFirstName().length(), 19)),
-                    employees.get(i).getLastName().substring(0,Math.min(employees.get(i).getLastName().length(), 19)),
-                    employees.get(i).getRole().substring(0,Math.min(employees.get(i).getRole().length(), 18)),
+                    employees.get(i).getFirstName().substring(0, Math.min(employees.get(i).getFirstName().length(), 19)),
+                    employees.get(i).getLastName().substring(0, Math.min(employees.get(i).getLastName().length(), 19)),
+                    employees.get(i).getRole().substring(0, Math.min(employees.get(i).getRole().length(), 18)),
                     dateToString(employees.get(i).gethireDate()),
                     employees.get(i).getSalary());
+        }
+        System.out.println(line);
+    }
+
+    public void displayMenus() {
+        String line =      "+------+----------------------------------+---------------------------------+--------------+-------+";
+        printHeader("Liste des menus");
+        System.out.println(line);
+        System.out.println("|  Id  |               Nom                |              Type               |   Création   | Plats |");
+        System.out.println(line);
+        for (int i = 0; i < menus.size(); i++) {
+            System.out.printf("| %4d | %32s | %31s |  %12s |  %4d |\n",
+                    menus.get(i).getId(),
+                    menus.get(i).getName().substring(0, Math.min(menus.get(i).getName().length(), 32)),
+                    menus.get(i).getMenuType().substring(0, Math.min(menus.get(i).getMenuType().length(), 31)),
+                    dateToString(menus.get(i).getDate()),
+                    menus.get(i).getDish() == null ? 0 : menus.get(i).getDish().size());
         }
         System.out.println(line);
     }
@@ -212,18 +229,12 @@ public class Restaurant {
         return maxId + 1;
     }
 
-    public void displayMenus() {
-        for (Menu menu : menus) {
-            System.out.println(menu.toString());
-        }
-    }
-
     public void removeMenu(int menu) {
 
         menus.remove(menu);
     }
 
-    public String toStringForText(){
+    public String toStringForText() {
         return String.format("id: %d\nname: %s\naddress: %s\n", id, name, address);
     }
 
