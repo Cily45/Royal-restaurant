@@ -22,8 +22,6 @@ public class MainEmployee implements Command {
 
     @Override
     public void execute() {
-        // printHeader(this.message());
-
         Command[] commands = {
                 new DisplayEmployee(this.restaurant),
                 new AddEmployee(this.restaurant),

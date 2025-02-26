@@ -31,7 +31,7 @@ public class ModifyInfoEmployee implements Command {
 
         int choice = askInt(itemsDisplay, info);
 
-        if (choice > 0 && choice < itemsDisplay.length) {
+        if (choice >= 0 && choice < itemsDisplay.length) {
             String entry = switch (itemsDisplay[choice]) {
                 case "salary" ->
                         String.valueOf(askDouble(String.format("Entrez la nouvelle valeur pour %s: ", itemsDisplay[choice])));

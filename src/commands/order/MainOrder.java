@@ -1,4 +1,4 @@
-package commands.menu;
+package commands.order;
 
 import commands.Command;
 import commands.general.Exit;
@@ -7,27 +7,29 @@ import model.Restaurant;
 
 import static utils.ConsoleUtils.askInt;
 
-public class MainMenu implements Command {
+public class MainOrder implements Command {
     private Restaurant restaurant;
 
-    public MainMenu(Restaurant restaurant) {
+    public MainOrder(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
 
     @Override
     public String message() {
-        return "Gestion des menu";
+        return "Gestion des commandes";
     }
 
     @Override
     public void execute() {
         Command[] commands = {
-                new DisplayMenu(restaurant),
-                new AddMenu(restaurant),
-                new SelectMenu(restaurant, "modifier"),
-                new SelectMenu(restaurant, "supprimer"),
+                new DisplayOrder(restaurant),
+                new AddOrder(restaurant),
                 new MainRestaurant(),
-                new Exit()};
+                new Exit()
+        };
+
+        // remove
+        // modify
 
         int choice = askInt(commands, this.message());
 

@@ -1,15 +1,18 @@
-package commands.restaurant;
+package commands.order;
 
 import commands.Command;
+import commands.restaurant.MainRestaurant;
+import model.Order;
 import model.Restaurant;
 
 import static utils.ConsoleUtils.askInt;
 
-public class SelectRestaurant implements Command {
+public class SelectOrder implements Command {
+    private Restaurant restaurant;
     private String message;
 
-    public SelectRestaurant(String message) {
-        this.message = message;
+    public SelectOrder(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override
@@ -19,18 +22,18 @@ public class SelectRestaurant implements Command {
 
     @Override
     public void execute() {
-        Restaurant.displayRestaurants();
+        restaurant.displayOrders();
         int id = askInt("Entrez l'id du restaurant que vous souhaitez modifier ([0] pour retourner à la gestion des restaurants):");
 
         if (Restaurant.getRestaurants().stream().anyMatch(r -> r.getId() == id)) {
-            Restaurant restaurant = Restaurant.getRestaurants().stream().filter(r -> r.getId() == id).findFirst().get();
+            Order order = restaurant.getOrders().stream().filter(r -> r.getId() == id).findFirst().get();
 
             switch (message) {
                 case "modifier":
-                    new ModifyRestaurant(restaurant).execute();
+                    new ModifyOrder(restaurant, order).execute();
                     break;
                 case "supprimer":
-                    new RemoveRestaurant(restaurant).execute();
+                    new RemoveOrder(restaurant, order).execute();
                     break;
             }
         } else if (id == 0) {

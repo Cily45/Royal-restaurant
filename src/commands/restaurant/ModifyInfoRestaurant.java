@@ -28,10 +28,10 @@ public class ModifyInfoRestaurant implements Command {
 
         int choice = askInt(itemsDisplay, info);
 
-        if (choice > 0 && choice < itemsDisplay.length) {
+        if (choice >= 0 && choice < itemsDisplay.length) {
             String entry = askString(String.format("Entrez la nouvelle valeur pour %s: ", itemsDisplay[choice]));
             reWrite(restaurant.getRestaurantFile().getAbsoluteFile() +"/info.txt", String.format("%s: %s", itemsInfo[choice], entry));
-        }else if(choice == 0){
+        }else if(choice == -1){
             new ModifyRestaurant(restaurant).execute();
         }
 

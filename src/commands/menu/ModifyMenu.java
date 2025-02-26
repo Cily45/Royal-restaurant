@@ -1,35 +1,37 @@
-package commands.restaurant;
+package commands.menu;
 
 import commands.Command;
-import commands.employee.MainEmployee;
+import commands.dish.MainDish;
 import commands.general.Exit;
-import commands.menu.MainMenu;
+import model.Menu;
 import model.Restaurant;
 
-import static utils.ConsoleUtils.*;
+import static utils.ConsoleUtils.askInt;
 
-public class ModifyRestaurant implements Command {
+public class ModifyMenu implements Command {
     private Restaurant restaurant;
+    private Menu menu;
 
-    public ModifyRestaurant(Restaurant restaurant) {
+    public ModifyMenu(Restaurant restaurant, Menu menu) {
+        this.menu = menu;
         this.restaurant = restaurant;
     }
 
     @Override
     public String message() {
-        return "Modifier un restaurant";
+        return String.format("Modificaton de %s", menu.getName());
     }
 
     @Override
     public void execute() {
-        Command[] commands = {
-                new ModifyInfoRestaurant(restaurant),
-                new MainEmployee(restaurant),
+        Command[] commands  = {
+                new ModifyInfoMenu(restaurant, menu),
+                new MainDish(restaurant, menu),
                 new MainMenu(restaurant),
-                new MainRestaurant(),
-                new Exit()};
+                new Exit()
+        };
 
-        String info = String.format("modification du restaurant: %s", restaurant.getName());
+        String info = String.format("modification du menu: %s", menu.getName());
         int choice = askInt(commands, info);
 
         if (choice < commands.length && choice >= 0) {

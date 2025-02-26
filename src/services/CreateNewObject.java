@@ -34,10 +34,12 @@ public class CreateNewObject {
         return new File(path);
     }
 
-    public static void createMenu(Menu menu, Restaurant restaurant) {
+    public static File createMenu(Menu menu, Restaurant restaurant) {
         String path = String.format("%s/data/%d/menus/%d", System.getProperty("user.dir"),restaurant.getId(), menu.getId());
         File file = new File(path);
         file.mkdir();
         writeFile(file.getAbsolutePath()+"/info.txt",menu.toStringForText());
+
+        return file;
     }
 }

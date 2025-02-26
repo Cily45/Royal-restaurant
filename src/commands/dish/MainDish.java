@@ -1,33 +1,39 @@
-package commands.menu;
+package commands.dish;
 
 import commands.Command;
 import commands.general.Exit;
-import commands.restaurant.MainRestaurant;
+import commands.menu.MainMenu;
+import model.Menu;
+import model.Order;
 import model.Restaurant;
 
 import static utils.ConsoleUtils.askInt;
 
-public class MainMenu implements Command {
+public class MainDish implements Command {
+    private Menu menu;
+    private Order order;
     private Restaurant restaurant;
 
-    public MainMenu(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public MainDish(Restaurant restaurant, Menu menu) {
+        this.menu = menu;
+    }
+
+    public MainDish(Restaurant restaurant, Order order) {
+        this.order = order;
     }
 
     @Override
     public String message() {
-        return "Gestion des menu";
+        return "Gestion des plats";
     }
 
     @Override
     public void execute() {
         Command[] commands = {
-                new DisplayMenu(restaurant),
-                new AddMenu(restaurant),
-                new SelectMenu(restaurant, "modifier"),
-                new SelectMenu(restaurant, "supprimer"),
-                new MainRestaurant(),
-                new Exit()};
+                 new AddDish(menu),
+                new MainMenu(restaurant),
+                new Exit()
+        };
 
         int choice = askInt(commands, this.message());
 

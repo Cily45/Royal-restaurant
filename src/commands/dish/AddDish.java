@@ -3,6 +3,7 @@ package commands.dish;
 import commands.Command;
 import model.Dish;
 import model.Menu;
+import model.Order;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,8 +24,7 @@ public class AddDish implements Command {
 
     @Override
     public void execute() {
-        printHeader( this.message());
-
+        printHeader(this.message());
         String name = askString("Quel est le nom du plat?");
         String description = askString("Entrez la description du plat:");
         double price = askDouble("Quel est le prix du plat?");
@@ -37,10 +37,14 @@ public class AddDish implements Command {
         ArrayList<String> ingredients = new ArrayList<>();
         System.out.println("Entrez la liste des ingrédients du plat(entrée vide pour finir):");
         int count = 1;
-        while(true){
+
+        while (true) {
             String ingredient = askString("ingredient " + count + ":");
-            if(ingredient.isEmpty())
+
+            if (ingredient.isEmpty()) {
                 break;
+            }
+
             ingredients.add(ingredient);
             count++;
         }
@@ -49,6 +53,11 @@ public class AddDish implements Command {
         int timeToPrepare = askInt("Combien de temps faut-il pour préparer ce plat?");
         double specialPrice = askDouble("Quel est le prix spécial du plat?");
 
-        new Dish(name, description, price, calorie, category, size, createDate, available, ingredients, dishType, timeToPrepare, specialPrice, this.menu);
+        if (this.menu == null) {
+            new Dish(name, description, price, calorie, category, size, createDate, available, ingredients, dishType, timeToPrepare, specialPrice, this.order);
+        } else {
+            new Dish(name, description, price, calorie, category, size, createDate, available, ingredients, dishType, timeToPrepare, specialPrice, this.menu);
+        }
     }
 }
+

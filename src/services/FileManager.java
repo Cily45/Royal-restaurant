@@ -135,7 +135,7 @@ public class FileManager {
                 linesMenu.get("name"),
                 linesMenu.get("menuType"),
                 dateParse(linesMenu.get("createDate")),
-                file
+                fileMenu
         );
     }
     

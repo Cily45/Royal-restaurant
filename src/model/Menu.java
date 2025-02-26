@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,7 +14,7 @@ public class Menu {
     private Date createDate;
     private String menuType;
     private ArrayList<Dish> dishes;
-    private String restaurantFile;
+    private File menuFile;
 
 
     public Menu(String name, String menuType, Restaurant restaurant, Date createDate) {
@@ -22,16 +23,17 @@ public class Menu {
         this.id = nextId(restaurant);
         this.createDate = createDate;
         this.dishes = new ArrayList<>();
-        createMenu( this, restaurant);
+        this.menuFile = createMenu( this, restaurant);
         restaurant.addMenu(this);
+
     }
 
-    public Menu(int id, String name, String menuType, Date createDate, String restaurantFile) {
+    public Menu(int id, String name, String menuType, Date createDate, File menuFile) {
         this.name = name;
         this.menuType = menuType;
         this.id = id;
         this.createDate = createDate;
-        this.restaurantFile = restaurantFile;
+        this.menuFile = menuFile;
     }
 
     public int nextId(Restaurant restaurant) {
@@ -113,6 +115,10 @@ public class Menu {
         }
 
         return result.toString();
+    }
+
+    public File getMenuFile() {
+        return menuFile;
     }
 
     @Override

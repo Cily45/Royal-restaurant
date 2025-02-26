@@ -13,11 +13,11 @@ public class SelectMenu implements Command {
     public SelectMenu( Restaurant restaurant, String message) {
         this.message = message;
         this.restaurant = restaurant;
-
     }
 
     @Override
     public String message() {
+
         return String.format("Sélectionner un menu à %s", this.message);
     }
 
@@ -31,7 +31,7 @@ public class SelectMenu implements Command {
             Menu menu= restaurant.getMenus().stream().filter(r -> r.getId() == id).findFirst().get();
             switch (message) {
                 case "modifier":
-                    new ModifyInfoMenu(this.restaurant, menu).execute();
+                    new ModifyMenu(this.restaurant, menu).execute();
                 case "supprimer":
                     new RemoveMenu(this.restaurant, menu).execute();
             }
@@ -41,6 +41,5 @@ public class SelectMenu implements Command {
             System.out.println("Menu inexistant");
             this.execute();
         }
-
     }
 }

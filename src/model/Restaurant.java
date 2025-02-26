@@ -130,20 +130,6 @@ public class Restaurant {
         System.out.println(line);
     }
 
-    public void saveOrders(String filename) {
-        try {
-            File file = new File(filename);
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (Order order : orders) {
-                bufferedWriter.write(order.toString());
-            }
-            bufferedWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public ArrayList<Menu> getMenus() {
 
         return menus;
@@ -155,30 +141,6 @@ public class Restaurant {
             count += (long) employee.getSalary();
         }
         System.out.println(count);
-    }
-
-    public void recoverOrders(String filename) {
-        try {
-            File file = new File(filename);
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void setRestaurants(ArrayList<Restaurant> restaurants) {
-        Restaurant.restaurants = restaurants;
-    }
-
-    public void addMenu(Menu menu) {
-        this.menus.add(menu);
-        menus.sort(Comparator.comparing(Menu::getId));
     }
 
     public File getRestaurantFile() {
@@ -236,8 +198,11 @@ public class Restaurant {
     }
 
     public void removeMenu(int menu) {
-
         menus.remove(menu);
+    }
+
+    public void addMenu(Menu menu) {
+        menus.add(menu);
     }
 
     public String toStringForText() {
