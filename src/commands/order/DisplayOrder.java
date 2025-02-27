@@ -25,7 +25,7 @@ public class DisplayOrder implements Command {
         restaurant.displayOrders();
 
         if (askInt("[0] pour retourner au menu ") == -1) {
-            new MainRestaurant().execute();
+            new MainOrder(restaurant).execute();
         }
     }
 }

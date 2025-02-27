@@ -11,8 +11,9 @@ public class SelectOrder implements Command {
     private Restaurant restaurant;
     private String message;
 
-    public SelectOrder(Restaurant restaurant) {
+    public SelectOrder(Restaurant restaurant, String message) {
         this.restaurant = restaurant;
+        this.message = message;
     }
 
     @Override

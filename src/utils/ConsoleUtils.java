@@ -1,10 +1,12 @@
 package utils;
 
 import commands.Command;
+import model.Dish;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 // 14h17 60%
@@ -80,6 +82,31 @@ public class ConsoleUtils {
         } catch (Exception e) {
             System.out.println("Veuillez entrer un nombre valide!");
             return askInt(items, message);
+        }
+
+        return result - 1;
+    }
+
+    public static int askInt(HashMap<Dish, Integer> dishes, String message) {
+        printHeader(message);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("|" + " ".repeat(98) + "|");
+        int count = 1;
+        for (Dish dish : dishes.keySet()) {
+            String dishFormat = String.format("%s quantité: %d", dish.getName(), dishes.get(dish));
+            System.out.println(String.format("|%s[%d] %s%s|", " ".repeat(10), count + 1, dishFormat, " ".repeat((98 - dishFormat.length()) - 14)));
+        }
+
+        System.out.println("|" + " ".repeat(98) + "|");
+        System.out.println("=".repeat(100));
+        System.out.print("Veuillez choisir une option ([0] pour retourner en arrière): ");
+        int result = 0;
+
+        try {
+            result = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Veuillez entrer un nombre valide!");
+            return askInt(dishes, message);
         }
 
         return result - 1;

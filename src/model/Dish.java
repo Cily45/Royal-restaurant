@@ -37,23 +37,6 @@ public class Dish {
         menu.addDish(this);
     }
 
-    public Dish(String name, String description, double price, int calorie, String category, int size, Date createDate, boolean available, ArrayList<String> ingredients, String dishType, int timeToPrepare, double specialPrice, Order order) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.calorie = calorie;
-        this.category = category;
-        this.size = size;
-        this.createDate = createDate;
-        this.available = available;
-        this.ingredients = ingredients;
-        this.dishType = dishType;
-        this.timeToPrepare = timeToPrepare;
-        this.specialPrice = specialPrice;
-        this.id = nextId(order);
-        order.addDish(this);
-    }
-
     public Dish(int id, String name, String description, double price, int calorie, String category, int size, Date createDate, boolean available, ArrayList<String> ingredients, String dishType, int timeToPrepare, double specialPrice, String menuFile) {
         this.name = name;
         this.description = description;
@@ -209,16 +192,6 @@ public class Dish {
     public int nextId(Menu menu) {
         int maxId = 0;
         for (Dish dish : menu.getDish()) {
-            if (dish.id > maxId) {
-                maxId = dish.id;
-            }
-        }
-        return maxId + 1;
-    }
-
-    public int nextId(Order order) {
-        int maxId = 0;
-        for (Dish dish : order.getDishes()) {
             if (dish.id > maxId) {
                 maxId = dish.id;
             }

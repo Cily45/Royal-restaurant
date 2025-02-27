@@ -1,49 +1,51 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Order {
     private int id;
-    private ArrayList<Dish> dishes;
+    private HashMap<Dish, Integer> dishes;
     private int cost = 0;
-    private String restaurantFile;
+    private String orderFile;
 
     public Order(Restaurant restaurant) {
         this.id = nextId(restaurant);
     }
 
-    public Order(int id, String restaurantFile) {
+    public Order(int id, String orderFile) {
         this.id = id;
-        this.restaurantFile = restaurantFile;
+        this.orderFile = orderFile;
     }
 
-    public void addDish(Dish dish) {
-        dishes.add(dish);
-        cost = sumDishes();
-    }
-
-    public int sumDishes() {
-        int sum = 0;
-        for (Dish dish : dishes) {
-            sum += dish.getPrice();
+    public void addDish(Dish dish, int quantity) {
+        if(dishes.get(dish) == null) {
+            dishes.put(dish, quantity);
+        }else{
+           dishes.put(dish,(dishes.get(dish) + quantity));
         }
-        return sum;
+        dishes.put(dish, quantity);
+        cost += dish.getPrice() * quantity;
+    }
+
+    public void deleteDish(Dish dish){
+        dishes.remove(dish);
     }
 
     public void displayOrder(){
-        for (Dish dish : dishes) {
+        for (Dish dish : dishes.keySet()) {
             System.out.println(dish.toString());
         }
-        System.out.println(sumDishes());
+        System.out.println(cost);
     }
 
     public String toStringForText(){
         StringBuilder result = new StringBuilder();
         result.append(String.format("id: %d\ncost: %d", id, cost));
-
-        for (int i = 0; i < dishes.size(); i++) {
-            result.append(String.format("dish %d: %s\n", i, dishes.get(i).toStringForText()));
+        int count = 1;
+        for (Dish dish : dishes.keySet()) {
+            result.append(String.format("dish %d: %s\n", count, dish.toStringForText()));
+            count++;
         }
 
         return result.toString();
@@ -74,29 +76,5 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public ArrayList<Dish> getDishes() {
-        return dishes;
-    }
-
-    public void setDishes(ArrayList<Dish> dishes) {
-        this.dishes = dishes;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    public String getRestaurantFile() {
-        return restaurantFile;
-    }
-
-    public void setRestaurantFile(String restaurantFile) {
-        this.restaurantFile = restaurantFile;
     }
 }

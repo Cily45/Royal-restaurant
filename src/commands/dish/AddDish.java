@@ -52,12 +52,7 @@ public class AddDish implements Command {
         String dishType = askString("Quel est le type du plat?");
         int timeToPrepare = askInt("Combien de temps faut-il pour préparer ce plat?");
         double specialPrice = askDouble("Quel est le prix spécial du plat?");
-
-        if (this.menu == null) {
-            new Dish(name, description, price, calorie, category, size, createDate, available, ingredients, dishType, timeToPrepare, specialPrice, this.order);
-        } else {
-            new Dish(name, description, price, calorie, category, size, createDate, available, ingredients, dishType, timeToPrepare, specialPrice, this.menu);
-        }
+        new Dish(name, description, price, calorie, category, size, createDate, available, ingredients, dishType, timeToPrepare, specialPrice, this.menu);
     }
 }
 

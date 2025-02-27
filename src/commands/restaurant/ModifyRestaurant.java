@@ -4,6 +4,7 @@ import commands.Command;
 import commands.employee.MainEmployee;
 import commands.general.Exit;
 import commands.menu.MainMenu;
+import commands.order.MainOrder;
 import model.Restaurant;
 
 import static utils.ConsoleUtils.*;
@@ -26,6 +27,7 @@ public class ModifyRestaurant implements Command {
                 new ModifyInfoRestaurant(restaurant),
                 new MainEmployee(restaurant),
                 new MainMenu(restaurant),
+                new MainOrder(restaurant),
                 new MainRestaurant(),
                 new Exit()};
 

@@ -24,12 +24,11 @@ public class MainOrder implements Command {
         Command[] commands = {
                 new DisplayOrder(restaurant),
                 new AddOrder(restaurant),
+                new SelectOrder(restaurant, "modifier"),
+                new SelectOrder(restaurant, "supprimer"),
                 new MainRestaurant(),
                 new Exit()
         };
-
-        // remove
-        // modify
 
         int choice = askInt(commands, this.message());
 
